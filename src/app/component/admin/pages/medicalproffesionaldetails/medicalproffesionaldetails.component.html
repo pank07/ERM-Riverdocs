@@ -1,0 +1,316 @@
+
+<div class="container-fluid p-3" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; border-radius: 10px;">
+    <div class="row align-items-center">
+      <div class="col-12 d-flex justify-content-between align-items-center">
+        <h2 class=" text-center flex-grow-1">Medical Proffesional Details</h2>
+      </div>
+    </div>
+  
+  
+    <div class="row">
+      <div class="col-md-2" *ngFor="let a of allData">
+        <img [src]="a.profile || '../assets/profilephoto.jpg'" alt="User Avatar" class="rounded-circle img-fluid"
+          style="height: 155px; width: 155px;">
+      </div>
+      <div class="col-md-10">
+        <div class="row">
+          <div class="row mt-4">
+            <div class="col-md-3 mb-2">
+              <div class="card" (click)="openRoutineTab()">
+                <div class="card-body">
+                  <h5 class="card-title">Todays Routine</h5>
+                  <p class="card-text">{{routinelength || 0}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 mb-2">
+              <div class="card" (click)="opentaskTab()">
+                <div class="card-body">
+                  <h5 class="card-title">Resident</h5>
+                  <p class="card-text">{{tasklength || 0}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 mb-2">
+              <div class="card" (click)="openmedsTab()">
+                <div class="card-body">
+                  <h5 class="card-title">Notes</h5>
+                  <p class="card-text">{{getnotessdatalength || 0}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row card-view" *ngFor="let a of allData">
+      <div class="col-md-4">
+        <div class="cardss card h-80">
+          <div class="card-header d-flex justify-content-between">
+            <small class="fw-bold"> </small>
+          </div>
+          <div class="card-body">
+            <p class="custom"><small> <b>Name:</b></small> {{a.first_name}}</p>
+            <p class="custom"><small> <b>User Type:</b></small> {{a.group_name}}</p>
+            <p class="custom"><small> <b>Contact:</b></small> {{a.email}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="cardss card   h-80">
+          <div class="card-header d-flex justify-content-between">
+            <small class="fw-bold"> </small>
+          </div>
+          <div class="card-body">
+            <p class="custom"><small> <b>Date of Birth:</b></small> {{a.date_of_birth | date:'dd-MM-yyyy'}}</p>
+            <p class="custom"> <small> <b>Date of Joining:</b></small> {{a.date_of_joining | date:'dd-MM-yyyy'}}</p>
+            <p class="custom"><small> <b>Designation:</b></small>  {{a.designation}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4"  *ngIf="getnotessdatass.length > 0; else noData">
+        <div class="cardss card  h-80"  style="border: 2px solid orange;" *ngFor="let item of getnotessdatass">
+          <div class="card-header d-flex justify-content-between " style="padding: 4px;">
+           <small>{{item.user_id }} {{item.time}}</small>   <small>Notes</small> 
+          </div>
+          <div class="card-body">
+            <p class="customsss"> <small>{{item.description }}</small>
+  
+           <small>  <span *ngIf="!item.expanded">
+                {{ item.description | slice:0:20}} ....
+                <a href="#" (click)="item.expanded = true; $event.preventDefault()"><i class="fa-regular fa-comment-dots"></i></a> <br>
+                
+              </span>
+            </small> 
+            <small>
+              <span *ngIf="item.expanded">
+                {{ item.description }}
+                <a href="#" (click)="item.expanded = false; $event.preventDefault()"><i class="fa-regular fa-comment-dots"></i></a>
+              </span>
+            </small> 
+            </p>
+  
+          </div>
+        </div>
+
+      
+    </div>
+    <ng-template #noData>
+      <div class="col-md-4">
+        <p>No notes available.</p>
+      </div>
+    </ng-template>
+</div>
+    <div class="row mt-3">
+      <div class="col-md-12">
+        <nav>
+          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button"
+              role="tab" aria-controls="nav-profile" aria-selected="false">Residents</button>
+            <button class="nav-link" id="nav-Notes-tab" data-bs-toggle="tab" data-bs-target="#nav-Notes" type="button"
+              role="tab" aria-controls="nav-Notes" aria-selected="false">Notes</button>
+          </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+          <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            <div class="col-md-4">
+          
+            <div class="card shadow-lg border-light rounded" *ngFor="let a of residentbymedicalprofessionalssss">
+              <div class="card-header text-white d-flex justify-content-between">
+                <p class=" mb-0">medicine_name</p>
+                <span>
+                  <!-- <button class="btn btn-secondary btn-sm m-1" (click)="toggleStatus(mt)">
+                          {{ mt.status === 1 ? 'Deactivate' : 'Activate' }}
+                        </button>
+                      <i data-bs-toggle="modal" (click)="byId(mt.id)"  data-bs-target="#editModal" class="fa-solid fa-pen-to-square"></i> -->
+                </span>
+      
+              </div>
+              <div class="card-body">
+                <div class="d-flex flex-column">
+                  <p class="card-text">
+      
+                    <strong>Resident's Name:</strong> {{a.first_name}} {{a.last_name}} <br>
+                    <strong>Room No:</strong> <span>Quantity</span> <br>
+                  </p>
+                  <p >
+                    <button  data-bs-toggle="modal" data-bs-target="#purchaseModal" class="btn btn-warning btn-sm">Purchase</button>
+                  </p>
+                  <p >
+                    <small class="text-success" >Order sended <br> OrderId - order_id <br> Order again  </small> <small> <a href="" data-bs-toggle="modal" data-bs-target="#purchaseModal">Click here</a>  </small>
+                  </p>
+                  <p class="text-muted">
+                    <small>
+                      <strong>Record Level:</strong>
+                      Record Level <br>
+                    </small>
+                  </p>
+                </div>
+              </div>
+      
+            </div>
+          </div>
+          </div>
+          <div class="tab-pane fade" id="nav-Notes" role="tabpanel" aria-labelledby="nav-Notes-tab">
+            <div class="col-lg-12 col-md-12 d-flex  gap-2  mt-2 "
+              style="background-color: #F7F7F7; white-space: wrap ; height: 70px; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px; border-radius: 10px;">
+              <h5 class="fs-4 mt-3 text-center p-2">Resident Notes</h5> <span><button type="button"
+                  routerLink="/Admin/addResidentNote" class="btn btn-primary mt-3"><span><i
+                      class="fa-sharp fa-solid fa-plus"></i></span> Add</button></span>
+            </div>
+            <div class="mt-2"
+              style="overflow-x: scroll; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; border-radius: 10px;">
+              <table class="table table-bordered table-hover table-striped ">
+                <thead class="" style="font-size: 13px; text-wrap: nowrap; ">
+                  <tr>
+                    <th>Id</th>
+                    <th>Notes</th>
+                    <th>Name</th>
+                   
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody style="text-wrap: nowrap;" class="">
+                  <tr *ngFor="let mild of getnotessdata ;  let i = index">
+                    <td>{{ i+1 }}</td>
+                    <td>{{mild.description}}</td>
+                    <td>{{mild.user_id}}</td>
+                    
+                    <td>{{mild.date_created | date:'dd-MM-yyy'}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Comments</h5>
+          <button type="button" class="btn btn-secondary ms-auto" (click)="toggleMedicineInput()">
+            Add PNR Medicine
+          </button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="addCommentForm" (ngSubmit)="onSubmitComment()">
+            <!-- PNR Medicine Selection Section -->
+            <div *ngIf="showMedicineInput" class="mb-3">
+              <div class="form-row">
+                <div class="form-group col-md-12">
+                  <label for="">Select PNR Medicine Name</label>
+                  <div class="multi-select-dropdown">
+                    <div class="selected-options">
+                      <span *ngFor="let user of selectedUsers" class="selected-item">
+                        {{ user.medicine_name }}
+                        <button type="button" class="unselect-btn" (click)="toggleSelection(user)">
+                          &times;
+                        </button>
+                      </span>
+                    </div>
+                    <div class="dropdown-options">
+                      <label *ngFor="let user of getmedicipnrnrrr" class="dropdown-item">
+                        <input type="checkbox" [checked]="isUserSelected(user)" (change)="toggleSelection(user)" />
+                        {{ user.medicine_name }}
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+            <!-- Comment Field -->
+            <div class="mb-3">
+              <label for="comment" class="form-label">Comment</label>
+              <textarea id="comment" formControlName="comment" class="form-control" placeholder="Add your comment here..."
+                rows="3"></textarea>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Add Comment</button>
+            </div>
+          </form>
+  
+          <!-- Comment List -->
+          <ul *ngIf="taskComments[selectedTask?.id]?.length; else noComments">
+            <li style="margin: 5x;" *ngFor="let comment of taskComments[selectedTask?.id]">
+              <strong>{{ comment.username }}:</strong> {{ comment.comment }}
+              <br />
+              <small class="text-muted">{{ comment.date_created | date: 'short' : 'UTC'  }}  <span
+                style="background-color: var(--sidebar-color); color: white; border-radius: 5px; padding: 3px;"> <i
+                  class="fa-solid fa-pills"></i> {{comment.pnr_medicine_name}}</span> </small>
+            </li>
+          </ul>
+          <ng-template #noComments>
+            <p>No comments yet for this task.</p>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!-- ===================================================================================== -->
+
+
+  
+  <!-- <div class="container-fluid">
+    
+    <div class="row">
+      
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <div class="card mb-4 shadow-sm" *ngFor="let a of allData" style="max-width: 350px; margin: auto;">
+          <div class="card-body text-center">
+            <img
+              [src]="a.profile || '../assets/profilephoto.jpg'"
+              class="card-img-top rounded-circle border"
+              alt="Card Image"
+              style="width: 150px; height: 150px; object-fit: cover;"
+            />
+            <h5 class="card-title mt-3 mb-2">{{ a.first_name }}</h5>
+            <p class="text-muted mb-3">{{ a.designation }}</p>
+            <ul class="list-group list-group-flush text-start">
+              <li class="list-group-item"><b>User Type:</b> {{ a.group_name }}</li>
+              <li class="list-group-item"><b>Contact:</b> {{ a.email }}</li>
+              <li class="list-group-item"><b>Date of Birth:</b> {{ a.date_of_birth | date: 'dd-MM-yyyy' }}</li>
+              <li class="list-group-item"><b>Date of Joining:</b> {{ a.date_of_joining | date: 'dd-MM-yyyy' }}</li>
+              <li class="list-group-item"><b>Designation:</b> {{ a.designation }}</li>
+            </ul>
+          </div>
+        </div>
+        
+        
+      </div>
+      
+    </div>
+    
+  </div> -->
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

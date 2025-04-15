@@ -1,0 +1,113 @@
+
+  
+  .three h1 {
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.5em;
+    padding-bottom: 15px;
+    position: relative;
+  }
+  .three h1:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 5px;
+    width: 55px;
+    background-color: #111;
+  }
+  .three h1:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 2px;
+    height: 1px;
+    width: 95%;
+    max-width: 255px;
+    background-color: #333;
+  }
+
+
+  .four h1 {
+    text-align: end;
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.5em;
+    padding-bottom: 15px;
+    position: relative;
+  }
+  .four h1:before {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 5px;
+    width: 55px;
+    background-color: #111;
+  }
+  .four h1:after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 2px;
+    height: 1px;
+    width: 95%;
+    max-width: 255px;
+    background-color: #333;
+  }
+
+    .card-header {
+    border-radius: 15px 15px 0 0;
+   
+  }
+
+  .sticky-note {
+    background-color: #f9e29d; /* Light yellow to mimic a sticky note */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+    transform: rotate(-2deg); /* Slight tilt to mimic sticky notes */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+  
+  .sticky-note:hover {
+    transform: rotate(0deg); /* Return to straight position when hovered */
+    box-shadow: 6px 6px 16px rgba(0, 0, 0, 0.3);
+  }
+  
+  .note-header {
+    background-color: #f6c88b;
+    padding: 5px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .note-body {
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+  .note-footer {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .note-title {
+    font-size: 1.2rem;
+    color: #3a3a3a;
+  }
+  
+  button.btn {
+    margin-top: 10px;
+    background-color: transparent;
+    border: 1px solid #5a5a5a;
+  }
+  
+  button.btn:hover {
+    background-color: #f6c88b;
+  }
+  
+  

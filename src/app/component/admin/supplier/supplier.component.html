@@ -1,0 +1,57 @@
+
+<div class="container">
+    
+    <div class="row">
+        
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <h2>Add Pharmacy</h2>
+        </div>
+
+        
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+                <label for="pharmacy_name">Pharmacy Name:</label>
+                <input type="text" id="pharmacy_name" formControlName="pharmacy_name" />
+                <div *ngIf="addForm.get('pharmacy_name')?.invalid && addForm.get('pharmacy_name')?.touched">
+                    Pharmacy Name is required.
+                </div>
+            
+                <label for="contact">Contact:</label>
+                <input type="text" id="contact" formControlName="contact" />
+                <div *ngIf="addForm.get('contact')?.invalid && addForm.get('contact')?.touched">
+                    Contact must be a valid 10-digit number.
+                </div>
+            
+                <label for="order_id">Order ID:</label>
+                <input type="text" id="order_id" formControlName="order_id" />
+                <div *ngIf="addForm.get('order_id')?.invalid && addForm.get('order_id')?.touched">
+                    Order ID is required.
+                </div>
+            
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" formControlName="quantity" />
+                <div *ngIf="addForm.get('quantity')?.invalid && addForm.get('quantity')?.touched">
+                    Quantity must be at least 1.
+                </div>
+            
+                <label for="old_quantity">Old Quantity:</label>
+                <input type="number" id="old_quantity" formControlName="old_quantity" />
+            
+                <label for="email">Email:</label>
+                <input type="email" id="email" formControlName="email" />
+                <div *ngIf="addForm.get('email')?.invalid && addForm.get('email')?.touched">
+                    Enter a valid email address.
+                </div>
+            
+                <label for="last_mail">Last Mail:</label>
+                <input type="text" id="last_mail" formControlName="last_mail" />
+            
+                <button type="submit" [disabled]="addForm.invalid">Submit</button>
+            </form>
+            
+        </div>
+        
+        
+    </div>
+    
+</div>

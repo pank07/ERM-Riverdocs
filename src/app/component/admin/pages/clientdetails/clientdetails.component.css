@@ -1,0 +1,98 @@
+.card {
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  border-left: 4px solid var(--sidebar-color);
+  transition: transform 0.2s;
+  border-radius: 10px;
+}
+
+.xl .card {
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  border: none;
+  transition: transform 0.2s;
+  border-radius: 10px;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-header {
+  background-color: var(--sidebar-color);
+  color: white;
+  font-weight: bold;
+}
+
+.drag-drop-zone {
+  border: 2px dashed #ccc;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.3s ease-in-out;
+}
+.drag-drop-zone:hover {
+  border-color: #3f51b5;
+}
+
+.btn-primary, .btn-success{
+  background-color: var(--sidebar-color);
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.multi-select-dropdown {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  max-width: auto;
+}
+
+.selected-options {
+  margin-bottom: 10px;
+}
+
+.selected-item {
+  display: inline-block;
+  background-color: #007bff;
+  color: white;
+  padding: 5px 10px;
+  margin: 2px;
+  border-radius: 3px;
+}
+
+.unselect-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-weight: bold;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.dropdown-options {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+}
+
+input[type='checkbox'] {
+  margin-right: 10px;
+}
+
+
+.custom{
+  margin-top: -0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.customsss{
+  margin-top: -0.5rem;
+  margin-bottom: 1.0rem;
+}
+

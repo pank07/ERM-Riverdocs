@@ -1,0 +1,207 @@
+<div class="container-fluid p-3 py-4" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; border-radius: 10px;">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="text-center m-4">User Details</h2>
+            <hr>
+        </div>
+    </div>
+ 
+ 
+    <div class="row">
+        <div class="col-md-2" *ngFor="let a of allData">
+            <img [src]="a.profile || '../assets/profilephoto.jpg'" alt="User Avatar" class="rounded-circle img-fluid" style="height: 155px; width: 155px;">
+
+        </div>
+        <div class="col-md-10">
+            <div class="row">
+                <div class="row mt-4">
+                   
+                    <div class="col-md-3 mb-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Comments</h5>
+                                <p class="card-text">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <div class="card ">
+                            <div class="card-body">
+                                <h5 class="card-title">Tasks</h5>
+                                <p class="card-text">0</p>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+
+    <div class="row mt-3 card-view" *ngFor="let a of allData">
+        <div class="col-md-6">
+
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                  <small class="fw-bold"> </small>
+                </div>
+                <div class="card-body">
+                    <p><strong>Name:</strong> {{a.first_name}}</p>
+                    <p><strong>User Type:</strong> {{a.group_name}}</p>
+                    <p><strong>Contact:</strong>{{a.email}}</p> 
+                    <!-- <p><strong>Status:</strong> <span  style="background-color: #218838; color: white; border-radius: 10px;  padding: 3px;">{{a.active}}</span></p>  -->
+                </div>
+               
+              </div>
+
+          
+        </div>
+        <div class="col-md-6">
+
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                  <small class="fw-bold"> </small>
+                </div>
+                <div class="card-body">
+                    <p><strong>Date of Birth:</strong>{{a.date_of_birth | date:'dd-MM-yyyy'}}</p>
+          <p><strong>Date of Joining:</strong> {{a.date_of_joining | date:'dd-MM-yyyy'}}</p>
+          <p><strong>Designation:</strong> {{a.designation}}</p>
+                </div>
+               
+              </div>
+
+          
+        </div>
+    </div>
+
+    
+    
+    <div class="row">
+        
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <h4>Add Document</h4>
+            <form  [formGroup]="addDoc" (ngSubmit)="uploadFiles()">
+               <input type="text" formControlName="title"  class="form-control" placeholder="Enter title">
+               <input type="text" formControlName="user_id" [(ngModel)]="mainId" hidden>
+              
+                <div
+                cdkDropList
+                (cdkDropListDropped)="onFileDropped($event)"
+                class="drag-drop-zone mt-2"
+                (dragover)="onDragOver($event)"
+                (drop)="onDrop($event)"
+              >
+                <p>Drag and drop files here or click to upload.</p>
+                <input type="file" multiple (change)="onSelectFile($event)" hidden #fileInput />
+                <button type="button" (click)="fileInput.click()">Choose Files</button>
+              </div>
+               
+            
+                <button type="submit" class="btn btn-primary mt-2">Submit</button>
+            </form>
+            
+           
+<!-- <div *ngIf="files.length > 0">
+  <h3>Selected Files:</h3>
+  <ul>
+    <li *ngFor="let file of files">{{ file.name }}</li>
+  </ul>
+  <button type="button" >Upload Files</button>
+</div> -->
+
+        </div>
+        
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            
+            <div class="table-responsive mt-4">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Document</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor=" let doc of filteredDocs" >
+                            <td> {{ doc.title }} </td>
+                            <td> <img [src]="doc.document" class="img-fluid w-25" alt=""> </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+        
+    </div>
+
+
+
+
+
+    <div class="row mt-3">
+
+        <div class="col-md-12">
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
+                        type="button" role="tab" aria-controls="nav-home" aria-selected="true">Task</button>
+                  
+
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active mt-3" id="nav-home" role="tabpanel"
+                    aria-labelledby="nav-home-tab">
+                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+
+                        <div class="mt-2"
+                            style="overflow-x: scroll; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; border-radius: 10px;">
+                            <table class="table table-bordered table-hover table-striped ">
+                                <thead>
+                                    <tr>
+                                        <th>Due Date </th>
+                                        <th>Description </th>
+                                        <th>Day</th>
+                                        <th>Comment Count</th>
+                                        <th>medicine_id</th>
+                                        <th>milestone_id</th>
+                                        <th>name </th>
+                                        <th>task_message </th>
+                                        <th>status</th>
+                                        <th>start_date</th>
+                                        <th>project_id</th>
+                                        <th>priority</th>
+                                        <th> time </th>
+                                        <th>unit</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{getbydatasss.due_date}}</td>
+                                        <td>{{getbydatasss.description}}</td>
+                                        <td>{{getbydatasss.day}}</td>
+                                        <td>{{getbydatasss.comment_count}}</td>
+                                        <td>{{getbydatasss.medicine_id}}</td>
+                                        <td>{{getbydatasss.milestone_id}}</td>
+                                        <td>{{getbydatasss.name}}</td>
+                                        <td>{{getbydatasss.task_message}}</td>
+                                        <td>{{getbydatasss.status}}</td>
+                                        <td>{{getbydatasss.start_date}}</td>
+                                        <td>{{getbydatasss.project_id}}</td>
+                                        <td>{{getbydatasss.priority}}</td>
+                                        <td>{{getbydatasss.time}}</td>
+                                        <td>{{getbydatasss.unit}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+               
+
+
+            </div>
+        </div>
+    </div>
+</div>

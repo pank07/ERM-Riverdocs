@@ -1,0 +1,593 @@
+<div class="container-fluid">
+  <div class="row mt-4 ">
+
+    <!-- <div class="col-md-6 col-lg-3 col-sm-6 mb-3">
+      <div class="card">
+        <div routerLink="/Admin/Users" class="card-body d-flex align-items-center gap-3">
+          <div class="icon-box mr-3">
+            <i class="fas fa-users fa-lg "></i>
+          </div>
+          <div>
+            <h6 class="mb-1 fw-bold">Users</h6>
+            <p class="lead mb-0">{{getusersData}}</p>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <!-- <div class="col-md-6 col-lg-3 col-sm-6 mb-3">
+      <div class="card">
+        <div routerLink="/Admin/Clients" class="card-body d-flex align-items-center gap-3">
+          <div class="icon-box mr-3">
+            <i class="fas fa-user-circle fa-lg "></i>
+          </div>
+          <div>
+            <h6 class="mb-1 fw-bold">Residents</h6>
+            <p class="lead mb-0">{{clients}}</p>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <!-- <div class="col-md-6 col-lg-3 col-sm-6 mb-3">
+      <div class="card">
+        <div class="card-body d-flex align-items-center gap-3">
+          <div class="icon-box mr-3">
+            <i class="fas fa-tasks fa-lg "></i>
+          </div>
+          <div>
+            <h6 class="mb-1 fw-bold">Tasks</h6>
+            <p class="lead mb-0">0</p>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <!-- <div class="col-md-6 col-lg-3 col-sm-6 mb-3">
+      <div class="card">
+        <div routerLink="/Admin/Projects" routerLinkActive="router-link-active"
+          class="card-body d-flex align-items-center gap-3">
+          <div class="icon-box mr-3">
+           
+            <i class="fa-solid fa-note-sticky fa-lg"></i>
+          </div>
+          <div>
+            <h6 class="mb-1 fw-bold">Notes</h6>
+
+            <p class="lead mb-0">{{allTask}} </p>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+
+
+    <div class="col-sm-6 col-md-4 col-12">
+      <div class="card l-bg-light_blue " style="border-left: 4px solid #FFC169;">
+        <div class="card-statistic-3 p-3">
+          <div class="card-icon card-icon-large mt-3">
+            <i class="ri-user-add-line p-3" style="font-size: 7rem;"></i>
+            
+            </div>
+          <div class="mb-4">
+            <h5 class="card-title mb-0">Residents</h5>
+          </div>
+          <div class="row align-items-center mb-2 d-flex">
+            <div class="col-8">
+              <h2 class="d-flex align-items-center mb-0"> {{clients}} </h2>
+            </div>
+            <div class="col-4 text-right"><span> {{ clientPercentage.toFixed(1) }}% <i class="fa-solid fa-arrow-up"></i></span></div>
+          </div>
+          <div data-height="8" class="progress mt-1" style="height: 8px;">
+            <div
+          role="progressbar"
+          [style.width.%]="clientPercentage"
+          [attr.aria-valuenow]="clientPercentage"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          class="progress-bar bg-success progress-bar-striped progress-bar-animated"
+          
+        ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div  class="col-sm-6 col-md-4 col-12">
+      <div  class="card l-bg-light_green" style="border-left: 4px solid #5efcb2fb;">
+        <div  class="card-statistic-3 px-2 py-3">
+          <div  class="card-icon card-icon-large mt-3">
+            <i class="ri-user-line p-3" style="font-size: 7rem;"></i></div>
+          <div  class="mb-4">
+            <h5  class="card-title mb-0">Users</h5>
+          </div>
+          <div  class="row align-items-center mb-2 d-flex">
+            <div  class="col-8">
+              <h2  class="d-flex align-items-center mb-0">{{getusersData}}</h2>
+            </div>
+            <div  class="col-4 text-right"><span >{{userPercentage.toFixed(1)}}% <i
+                   class="ri-arrow-up-line"></i></span></div>
+          </div>
+          <div data-height="8" class="progress mt-1" style="height: 8px;">
+            <div
+          role="progressbar"
+          [style.width.%]="userPercentage"
+          [attr.aria-valuenow]="userPercentage"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          class="progress-bar bg-success progress-bar-striped progress-bar-animated"
+        ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div  class="col-sm-6 col-md-4 col-12">
+      <div  class="card l-bg-yellow"  style="border-left: 4px solid #f7698a;">
+        <div  class="card-statistic-3 px-2 py-3">
+          <div  class="card-icon card-icon-large mt-3">
+            <i class="ri-line-chart-line p-3" style="font-size: 7rem;"></i></div>
+          <div  class="mb-4">
+            <h5  class="card-title mb-0">Task</h5>
+          </div>
+          <div  class="row align-items-center mb-2 d-flex">
+            <div  class="col-8">
+              <h2  class="d-flex align-items-center mb-0">10</h2>
+            </div>
+            <div  class="col-4 text-right"><span >{{userPercentage.toFixed(1)}}% <i
+                   class="ri-arrow-up-line"></i></span></div>
+          </div>
+          <div data-height="8" class="progress mt-1" style="height: 8px;">
+            <div
+          role="progressbar"
+          [style.width.%]="userPercentage"
+          [attr.aria-valuenow]="userPercentage"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          class="progress-bar bg-success progress-bar-striped progress-bar-animated"
+        ></div>
+          </div>
+        </div>
+      </div>
+    </div>   
+    
+
+  </div>
+
+
+
+
+  <div class="row ">
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <canvas id="myChart"></canvas>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <canvas id="myTaskChart"></canvas>
+    </div>
+  </div>
+
+
+  <div class="row">
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-end">
+
+
+    </div>
+
+  </div>
+
+  <div class="row mt-5 justify-content-center">
+    <div class=" col-6 d-flex justify-content-between">
+      <h4>Appointments</h4>
+
+      <button type="button" class="btn btn-primary rounded-pill " data-bs-toggle="modal"
+        data-bs-target="#appointmentModal">
+        <i class="fa-solid fa-plus"></i>
+      </button>
+
+      <!-- Appoitment Modal -->
+      <div class="modal fade" id="appointmentModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Add Appointment</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+              <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()" class="container mt-1">
+                <div class="row mb-2" style="flex-direction: column;">
+
+                  <label for="first_name" class="col-sm-12 col-form-label">First Name</label>
+                  <div class="col-sm-12">
+                    <select formControlName="first_name" class="form-control">
+                      <option value="">Select Resident</option>
+                      <option *ngFor="let r of residentData" [value]="r.first_name"> {{ r.first_name }} </option>
+                    </select>
+                    <div *ngIf="f['first_name'].touched && f['first_name'].invalid" class="text-danger">
+                      <small *ngIf="f['first_name'].errors?.['required']">First Name is required.</small>
+                      <small *ngIf="f['first_name'].errors?.['maxLength']">First Name cannot be longer than 255
+                        characters.</small>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mb-2 " style="flex-direction: column;">
+                  <label for="title" class="col-sm-12 col-form-label">Title</label>
+                  <div class="col-sm-12">
+                    <input id="title" formControlName="title" type="text" class="form-control" />
+                    <div *ngIf="f['title'].touched && f['title'].invalid" class="text-danger">
+                      <small *ngIf="f['title'].errors?.['required']">Title is required.</small>
+                      <small *ngIf="f['title'].errors?.['maxLength']">Title cannot be longer than 255
+                        characters.</small>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mb-2" style="flex-direction: column;">
+                  <label for="description" class="col-sm-12 col-form-label">Description</label>
+                  <div class="col-sm-12">
+                    <textarea id="description" formControlName="description" class="form-control"></textarea>
+                    <div *ngIf="f['description'].touched && f['description'].invalid" class="text-danger">
+                      <small *ngIf="f['description'].errors?.['required']">Description is required.</small>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mb-2" style="flex-direction: column;">
+                  <label for="date" class="col-sm-12 col-form-label">Date</label>
+                  <div class="col-sm-12">
+                    <input id="date" formControlName="date" type="date" class="form-control" />
+                    <div *ngIf="f['date'].touched && f['date'].invalid" class="text-danger">
+                      <small *ngIf="f['date'].errors?.['required']">Date is required.</small>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mb-2" style="flex-direction: column;">
+                  <label for="start_time" class="col-sm-12 col-form-label">Start Time</label>
+                  <div class="col-sm-12">
+                    <input id="start_time" formControlName="start_time" type="time" class="form-control" />
+                    <div *ngIf="f['start_time'].touched && f['start_time'].invalid" class="text-danger">
+                      <small *ngIf="f['start_time'].errors?.['required']">Start Time is required.</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-2" style="flex-direction: column;">
+                  <label for="end_time" class="col-sm-12 col-form-label">End Time</label>
+                  <div class="col-sm-12">
+                    <input id="end_time" formControlName="end_time" type="time" class="form-control" />
+                    <div *ngIf="f['end_time'].touched && f['end_time'].invalid" class="text-danger">
+                      <small *ngIf="f['end_time'].errors?.['required']">End Time is required.</small>
+                    </div>
+                  </div>
+                </div>
+
+
+
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" [disabled]="appointmentForm.invalid" class="btn btn-primary">Submit</button>
+                </div>
+              </form>
+
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 d-flex justify-content-between">
+      <h4>Medical Events</h4>
+
+      <button type="button" class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#eventModal">
+        <i class="fa-solid fa-plus"></i>
+      </button>
+
+      <!-- Appoitment Modal -->
+      <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">New Medical Event</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+              <form [formGroup]="eventForm" (ngSubmit)="onSubmitEvent()">
+                <!-- Type Dropdown -->
+                <label for="type">Type:</label>
+                <select formControlName="type" class="form-control" id="type">
+                  <option selected hidden>Select Type</option>
+                  <option value="accident">Accident</option>
+                  <option value="emergency_call">Emergency Call</option>
+                  <option value="hospital_visit">Hospital Visit</option>
+                  <option value="medical_procedure">Medical Procedure</option>
+                  <option value="medical_visit">Medical Visit</option>
+                </select>
+                <div *ngIf="eventForm.get('type')?.touched && eventForm.get('type')?.invalid">
+                  <small class="text-danger">Type is required</small>
+                </div>
+
+                <!-- Title Input -->
+                <label for="title">Title:</label>
+                <input type="text" id="title" class="form-control" formControlName="title" />
+                <div *ngIf="eventForm.get('title')?.touched && eventForm.get('title')?.invalid">
+                  <small class="text-danger">Title is required</small>
+                </div>
+
+
+                <!-- Date Returned -->
+                <label for="date_returned">Date Returned:</label>
+                <input type="date" id="date_returned" class="form-control" formControlName="date_returned" />
+                <div *ngIf="eventForm.get('date_returned')?.touched && eventForm.get('date_returned')?.invalid">
+                  <small class="text-danger">Date returned is required</small>
+                </div>
+
+                <!-- Event Date -->
+                <label for="event_date">Event Date:</label>
+                <input type="date" id="event_date" class="form-control" formControlName="event_date" />
+                <div *ngIf="eventForm.get('event_date')?.touched && eventForm.get('event_date')?.invalid">
+                  <small class="text-danger">Event date is required</small>
+                </div>
+
+                <!-- Event Time -->
+                <label for="event_time">Event Time:</label>
+                <input type="time" id="event_time" class="form-control" formControlName="event_time" />
+                <div *ngIf="eventForm.get('event_time')?.touched && eventForm.get('event_time')?.invalid">
+                  <small class="text-danger">Event time is required</small>
+                </div>
+
+                <!-- Note -->
+                <label for="note">Note:</label>
+                <textarea id="note" class="form-control" formControlName="note"></textarea>
+                <div *ngIf="eventForm.get('note')?.touched && eventForm.get('note')?.invalid">
+                  <small class="text-danger">Note is required</small>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary mt-3" [disabled]="eventForm.invalid">
+                  Submit
+                </button>
+              </form>
+
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+
+
+  <div class="row">
+
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <div class="table-responsive mt-2">
+        <table class="table table-bordered" style="text-wrap: nowrap; ">
+          <thead>
+            <tr>
+
+              <th scope="col">First Name</th>
+              <th scope="col">Title</th>
+              <th scope="col">Description</th>
+              <th scope="col">Date</th>
+              <th scope="col">Start Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Loop through the appointments data and display each appointment -->
+            <tr *ngFor="let appointment of AppointmentsData">
+
+              <td>{{ appointment.first_name }}</td>
+              <td>{{ appointment.title }}</td>
+              <td>{{ appointment.description }}</td>
+              <td>{{ appointment.date | date: 'yyyy-MM-dd' }}</td>
+              <td>{{ appointment.start_time }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <div class="table-responsive mt-2">
+        <table class="table table-bordered ">
+          <thead>
+            <tr>
+
+              <th scope="col">Type</th>
+              <th scope="col">Title</th>
+              <th scope="col">Date Returned</th>
+              <th scope="col">Note</th>
+              <th scope="col">Event Date</th>
+              <th scope="col">Event Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Loop through the appointments data and display each appointment -->
+            <tr *ngFor="let event of eventsData">
+
+              <td>{{ event.type }}</td>
+              <td>{{ event.title }}</td>
+              <td>{{ event.date_returned | date: 'yyyy-MM-dd' }}</td>
+              <td>{{ event.note }}</td>
+              <td>{{ event.event_date | date: 'yyyy-MM-dd' }}</td>
+              <td>{{ event.event_time }}</td>
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="row mt-4">
+    <div class="xl col-md-6 mb-3">
+      <div class="card">
+        <div class="card-header">Room Status</div>
+        <div class="card-body">
+
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Room No</th>
+                  <th>Room Name</th>
+                  <th>Users</th>
+                  <th>Residents</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let rs of roomStatusData">
+                  <td> {{ rs.room_number }} </td>
+                  <td> {{ rs.name }} </td>
+                  <td> {{ rs.user_ids_count }} </td>
+                  <td> {{ rs.client_id_count }} </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class=" xl col-md-6 mb-3">
+      <div class="card">
+        <div class="card-header">Task Overview</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-hover" style="text-wrap: nowrap;">
+              <thead>
+                <tr>
+                  <th>Room No</th>
+                  <th>Room Name</th>
+                  <th>Done Tasks</th>
+                  <th>Missed Tasks</th>
+                  <th>To Do Tasks</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let rs of roomTaskStatusData">
+                  <td> {{ rs.room_number }} </td>
+                  <td> {{ rs.name }} </td>
+                  <td> {{ rs.doneCount }} </td>
+
+                  <td> {{ rs.missCount }} </td>
+
+                  <td> {{ rs.todoCount }} </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="row mt-4">
+    <!-- <div class="xl col-md-6 mb-3">
+      <div class="card">
+        <div class="card-header">Routine</div>
+        <div class="card-body">
+
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Priority</th>
+                  <th>Task Message</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td> {{userClientDetail?.id}} </td>
+                  <td> {{userClientDetail?.name}} </td>
+                  <td> {{userClientDetail?.priority}} </td>
+                  <td> {{userClientDetail?.task_message}} </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <div class="xl col-md-6 mb-3">
+      <div class="card">
+        <div class="card-header">Medication Task</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <!-- <th>Description</th> -->
+                  <th>Due Date</th>
+                  <th>Medicine</th>
+                  <th>Assigned By</th>
+                  <th>Client</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let task of medication_task">
+                  <td>{{ task.name }}</td>
+                  <!-- <td>{{ task.description }}</td> -->
+                  <td>{{ task.due_date | date: 'short' }}</td>
+                  <td>{{ task.medicine_id }}</td>
+                  <td>{{ task.username }}</td>
+                  <td>{{ task.clientname }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="xl col-md-6 mb-3">
+      <div class="card">
+        <div class="card-header">Care Task</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <!-- <th>Description</th> -->
+                  <th>Due Date</th>
+                  <th>Medicine</th>
+                  <th>Assigned By</th>
+                  <th>Client</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let task of care_task_home">
+                  <td>{{ task.name }}</td>
+                  <!-- <td>{{ task.description }}</td>/ -->
+                  <td>{{ task.due_date | date: 'short' }}</td>
+                  <td>{{ task.medicine_id }}</td>
+                  <td>{{ task.username }}</td>
+                  <td>{{ task.clientname }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+  </div>
+</div>

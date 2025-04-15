@@ -1,0 +1,477 @@
+<div class="col-12 d-flex justify-content-between align-items-center mt-3">
+  <!-- Title Section -->
+  <h5 class="fs-4 text-center text-md-start p-2 mb-0">Residents List</h5>
+
+  <!-- Add Button Section -->
+  <button *ngIf="hideFields == 1" type="button" (click)="addClient()" class="btn btn-primary addbutton text-white">
+    <i class="fa-sharp fa-solid fa-plus"></i> Add
+  </button>
+</div>
+
+
+
+<div class="mt-2" style="overflow-x: scroll; box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; border-radius: 10px;">
+  <table class="table table-bordered table-hover table-striped ">
+    <thead class="" style="font-size: 13px; text-wrap: nowrap; ">
+      <tr>
+        <th>Room No</th>
+        <th>Residents</th>
+        <th>Status</th>
+        <th>Role</th>
+        <th *ngIf="hideFields == 1">Action</th>
+      </tr>
+    </thead>
+    <tbody style="text-wrap: nowrap;" class="">
+      <tr style="background-color: #f9f9f9;" *ngFor="let a of getusersData;   let i = index">
+        <td style="text : center;">
+          <div class="d-flex gap-2" style="justify-content: center;">
+            <div>
+              <button type="button" class="btn small-btn  text-light" style="background-color: #34395e;">{{a.room_number
+                || 0}}</button>
+
+            </div>
+
+          </div>
+        </td>
+        <td  >
+          <div style="display: flex;  justify-content: start; margin-left:  10px;    padding-right: 60px;" class="gap-2 logosss">
+            <!-- Profile Image -->
+            <img [src]="a.profile || 'https://i.pinimg.com/736x/8b/16/7a/8b167af653c2399dd93b952a48740620.jpg'"
+              class="img-fluid"
+              style="width: 50px; height: 50px; border-radius: 100%; box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;"
+              alt="Profile Image">
+
+            <!-- Name and Email -->
+            <div style="margin-left: 0px;">
+              <p style="margin: 0; font-weight: bold;text-align: start;font-size: 0.9em;"> 
+                <!-- <span (click)="ByIds(a.id)"
+                  class="hover-underline" style="cursor: pointer;">{{ a.first_name }} {{a.last_name}}</span> -->
+                  <span [routerLink]="['/Admin/Facesheetpages']" (click)="ByIdsfacesheet(a.id)" 
+                  class="hover-underline" style="cursor: pointer;">{{ a.first_name }} {{a.last_name}}</span>
+                <span (click)="ByIds(a.id)" style="cursor: pointer;"><i class="fa-solid fa-eye m-2"></i></span>
+                <span *ngIf="hideFields == 1" style="cursor: pointer;" (click)="ById(a.id)" data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"><i class="fa-regular fa-pen-to-square m-2"></i></span>
+
+                <!-- <span (click)="ByIdgertbyid(a.id)" data-bs-toggle="modal" data-bs-target="#facesheetmodel"
+                  style="border: 1px solid #34395e; border-radius: 10px; padding: 3px; cursor: pointer;"
+                  class="hover-underline">Facesheet<i class="fa-solid fa-file m-1"></i></span> -->
+                  <span  [routerLink]="['/Admin/Facesheetpages']" (click)="ByIdsfacesheet(a.id)" routerLinkActive="router-link-active" 
+                  style="border: 1px solid #34395e; border-radius: 10px; padding: 3px; cursor: pointer;"
+                  class="hover-underline">Facesheet<i class="fa-solid fa-file m-1"></i></span>
+              </p>
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog  modal-lg">
+                  <div class="modal-content text-start">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Residents</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form #userForm="ngForm" (ngSubmit)="updateusers()">
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label for="name">First Name</label>
+                            <input type="text" class="form-control" id="first_name"
+                              [(ngModel)]="userByIdData.first_name" name="first_name" required />
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label>Last Name</label>
+                            <input type="text" class="form-control" id="last_name" [(ngModel)]="userByIdData.last_name"
+                              name="last_name" required />
+                          </div>
+                        </div>
+
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label>Email</label>
+                            <input type="text" class="form-control" id="email" [(ngModel)]="userByIdData.email"
+                              name="email" required />
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label>Profile </label>
+                            <input type="file" class="form-control" id="profile" (change)="onSelectFile($event)"
+                              name="profile" required />
+                          </div>
+
+                        </div>
+
+
+
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label>Date of Birth</label>
+                            <input type="text" class="form-control" id="date_of_birth" [value]="getFormattedDate()"
+                              [(ngModel)]="userByIdData.date_of_birth" name="date_of_birth" required />
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label>Date of Joining</label>
+                            <input type="text" class="form-control" id="date_of_joining"
+                              [(ngModel)]="userByIdData.date_of_joining" name="date_of_joining" required />
+                          </div>
+                        </div>
+
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label>Phone</label>
+                            <input type="text" class="form-control" id="phone" [(ngModel)]="userByIdData.phone"
+                              name="phone" required />
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label>Designation</label>
+                            <input type="text" class="form-control" id="designation"
+                              [(ngModel)]="userByIdData.designation" name="designation" required />
+                          </div>
+                        </div>
+                        <button type="submit" class="btn btn-success m-1">Save</button>
+                        <button type="button" class="btn btn-danger" type="button" data-bs-dismiss="modal"
+                          aria-label="Close">cancel</button>
+
+
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+              <!-- Modal -->
+             <!-- <div class="modal fade" id="facesheetmodel" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                  <div class="modal-content text-start">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+                      <button type="button" (click)="clearFaceSheet()" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                      <div class="facesheet-container">
+                        <div class="facesheet-header">
+                          <h1>FaceSheet</h1>
+                        </div>
+
+                        <div class="facesheet-section">
+                          <h3>Facility Information:-</h3>
+                          <div class="facesheet-row">
+                            <div class="facesheet-label">Facility Name:</div>
+                            <div class="facesheet-value">{{facesheetgetbyisdata.facility_name}}</div>
+                          </div>
+                        </div>
+
+
+
+                        <div class="facesheet-section">
+                          <h3>Personal Information:-</h3>
+                          <div class="row">
+                            <div class="col-sm-6">
+                              <div class="facesheet-row">
+                                <div class="facesheet-label">Name:</div>
+                                <div class="facesheet-value">{{facesheetgetbyisdata.facility_name}}</div>
+                              </div>
+                              <div class="facesheet-row">
+                                <div class="facesheet-label">Date of Birth:</div>
+                                <div class="facesheet-value">{{facesheetgetbyisdata.dob}}</div>
+                              </div>
+                              <div class="facesheet-row">
+                                <div class="facesheet-label">Gender:</div>
+                                <div class="facesheet-value">{{facesheetgetbyisdata.gender}}</div>
+                              </div>
+                              <div class="facesheet-row">
+                                <div class="facesheet-label">UCI #:</div>
+                                <div class="facesheet-value">{{facesheetgetbyisdata.uci}}</div>
+                              </div>
+                            </div>
+                            <div class="col-sm-6">
+                              <div class="facesheet-row">
+                                <div class="facesheet-label">Bed #:</div>
+                                <div class="facesheet-value">{{facesheetgetbyisdata.bed_number}}</div>
+                              </div>
+                              <div class="facesheet-row">
+                                <div class="facesheet-label">Patient #:</div>
+                                <div class="facesheet-value">{{facesheetgetbyisdata.facility_name}}</div>
+                              </div>
+                              <div class="facesheet-row">
+                                <div class="facesheet-label">Room #:</div>
+                                <div class="facesheet-value">{{facesheetgetbyisdata.room_number}}</div>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+
+
+                        <div class="facesheet-section">
+                          <h3>Insurance Information:-</h3>
+                          <div class="row">
+                            <div class="col-sm-6">
+                              <div class="facesheet-row">
+                                <div class="facesheet-label">Medical Insurance:</div>
+                                <div class="facesheet-value">{{facesheetgetbyisdata.insurance_id}}</div>
+                              </div>
+                              <div class="facesheet-row">
+                                <div class="facesheet-label">Other Insurance:</div>
+                                <div class="facesheet-value">{{facesheetgetbyisdata.other_insurance}}</div>
+                              </div>
+                            </div>
+                            <div class="col-sm-6">
+                              <div class="facesheet-row">
+                                <div class="facesheet-label">State Benefits:</div>
+                                <div class="facesheet-value">{{facesheetgetbyisdata.state_benefits}}</div>
+                              </div>
+
+                            </div>
+
+                          </div>
+                        </div>
+                        <div class="facesheet-section">
+                          <h3>Placement Details:-</h3>
+                          <div class="facesheet-row">
+                            <div class="facesheet-label">Date of Placement:</div>
+                            <div class="facesheet-value">{{facesheetgetbyisdata.diagnosis}}</div>
+                          </div>
+                          <div class="facesheet-row">
+                            <div class="facesheet-label">Previous Address:</div>
+                            <div class="facesheet-value">{{facesheetgetbyisdata.food_restrictions}}</div>
+                          </div>
+                        </div>
+
+
+                        <div class="facesheet-section">
+                          <h3>Physical Description:- </h3>
+                          <div class="row">
+                            <div class="col-sm-6">
+                              <div class="facesheet-row">
+                                <div class="facesheet-label">Height:</div>
+                                <div class="facesheet-value">{{facesheetgetbyisdata.height}}</div>
+                              </div>
+                              <div class="facesheet-row">
+                                <div class="facesheet-label">Weight:</div>
+                                <div class="facesheet-value">{{facesheetgetbyisdata.weight}} </div>
+                              </div>
+                            </div>
+                            <div class="col-sm-6">
+                              <div class="facesheet-row">
+                                <div class="facesheet-label">Eye Color:</div>
+                                <div class="facesheet-value">{{facesheetgetbyisdata.eye_color}} </div>
+                              </div>
+                              <div class="facesheet-row">
+                                <div class="facesheet-label">Hair Color:</div>
+                                <div class="facesheet-value">{{facesheetgetbyisdata.hair_color}} </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="facesheet-section">
+                          <h3>Medical Information:-</h3>
+                          <div class="row">
+                            <div class="col-sm-6">
+                              <div class="facesheet-row">
+                                <div class="facesheet-label">Diagnosis:</div>
+                                <div class="facesheet-value">{{facesheetgetbyisdata.diagnosis}}</div>
+                              </div>
+                              <div class="facesheet-row">
+                                <div class="facesheet-label">Food Restrictions:</div>
+                                <div class="facesheet-value">{{facesheetgetbyisdata.food_restrictions}}</div>
+                              </div>
+                            </div>
+                            <div class="col-sm-6">
+                              <div class="facesheet-row">
+                                <div class="facesheet-label">Diet:</div>
+                                <div class="facesheet-value">{{facesheetgetbyisdata.diet}} </div>
+                              </div>
+                              <div class="facesheet-row">
+                                <div class="facesheet-label">Medical Needs:</div>
+                                <div class="facesheet-value">{{facesheetgetbyisdata.medical_needs}} </div>
+                              </div>
+                            </div>
+                          </div>
+
+
+                        </div>
+
+
+                        <div class="facesheet-section">
+                          <h3>Medications:-</h3>
+                          <div class="row">
+                            <div class="col-sm-6">
+
+
+                              <div class="facesheet-row">
+                                <div class="facesheet-label">Medication Name:</div>
+                                <div class="facesheet-value">{{facesheetgetbyisdata.medication_name}}</div>
+                              </div>
+                              <div class="facesheet-row">
+                                <div class="facesheet-label">Dosage:</div>
+                                <div class="facesheet-value">{{facesheetgetbyisdata.dosage}}</div>
+                              </div>
+
+                              <div class="facesheet-row">
+                                <div class="facesheet-label">Frequency:</div>
+                                <div class="facesheet-value">{{facesheetgetbyisdata.frequency}} </div>
+                              </div>
+                            </div>
+                            <div class="col-sm-6">
+                              <div class="facesheet-row">
+                                <div class="facesheet-label">Prescribing MD:</div>
+                                <div class="facesheet-value">{{facesheetgetbyisdata.medical_needs}} </div>
+                              </div>
+                              <div class="facesheet-row">
+                                <div class="facesheet-label">Allergic to:</div>
+                                <div class="facesheet-value">{{facesheetgetbyisdata.allergies}} </div>
+                              </div>
+                            </div>
+                          </div>
+
+
+                        </div>
+
+
+
+
+
+
+
+
+
+                        <div class="facesheet-section">
+                          <h3>Professional Contacts /Physician & Pharmacy:-</h3>
+                          <div class="row">
+                            <div class="col-sm-6">
+                              <div class="facesheet-row">
+                                <div class="facesheet-label">Physician:</div>
+                                <div class="facesheet-value">{{facesheetgetbyisdata.physician}}</div>
+                              </div>
+                              <div class="facesheet-row">
+                                <div class="facesheet-label">Dentist:</div>
+                                <div class="facesheet-value">{{facesheetgetbyisdata.dentist}}</div>
+                              </div>
+                            </div>
+                            <div class="col-sm-6">
+                              <div class="facesheet-row">
+                                <div class="facesheet-label">Pharmacy:</div>
+                                <div class="facesheet-value">{{facesheetgetbyisdata.pharmacy}} </div>
+                              </div>
+                              <div class="facesheet-row">
+                                <div class="facesheet-label">Pharmacy:</div>
+                                <div class="facesheet-value">{{facesheetgetbyisdata.psychiatrist}} </div>
+                              </div>
+                            </div>
+
+                          </div>
+
+
+                        </div>
+
+                  
+
+
+
+
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        (click)="clearFaceSheet()">Close</button>
+                      <button type="button" (click)="downloadPDF()" class="btn btn-primary">Download</button>
+                    </div>
+                  </div>
+                </div>
+              </div>  -->
+              <p style="margin: 0; font-size: 0.9em; color: gray;text-align: start;">{{ a.email }}</p>
+            </div>
+          </div>
+        </td>
+
+        <td>
+
+          <select class="btn text-light" *ngIf="hideFields == 1"
+            style="border-radius: 10px;box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;"
+            [ngClass]="getStatusText(a.active)" name="clientStatus" id="clientStatus" [value]="getStatus(a.active)"
+            (change)="updateStatus(a, $any($event.target).value)">
+            <option value="0">Inactive</option>
+            <option value="1">Admit</option>
+            <option value="2">Discharge</option>
+
+          </select>
+
+          <p class="btn btn-sm text-light" style="border-radius: 20px; background-color: #34395e;"
+            *ngIf="hideFields == 0"> {{ status }} </p>
+        </td>
+
+        <td>
+          <button class="btn btn-sm text-light" style="border-radius: 20px; background-color: #34395e;">{{a.group_name
+            }}</button>
+        </td>
+
+        <td *ngIf="hideFields == 1">
+
+          <div class="position-relative" style="display: inline-block;">
+            <span (click)="groupidchnage(a.id)" (click)="togglePopover(i)"
+              style="cursor: pointer;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;padding: 10px;border-radius: 10px;">
+              <i class="fa-solid fa-ellipsis-vertical mx-1"></i>
+            </span>
+            <div *ngIf="activePopoverIndex === i" class="popover-menu"
+              style="position: absolute; top: 20px; right: 0; background: white; border: 1px solid #ccc; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); padding: 10px; z-index: 1000; border-radius: 5px;">
+              <ul style="list-style: none; margin: 0; padding: 0;">
+                <li style="display: flex; align-items: center; padding: 5px 0;">
+                  <i class="fa-solid fa-plus" style="margin-right: 8px; color: #333;"></i>
+                  <a style="text-decoration: none; color: #333;" (click)="changeGroupId(1, a.id)"
+                    class="hover-effect">Make Admin</a>
+                </li>
+                <li style="display: flex; align-items: center; padding: 5px 0;">
+                  <i class="fa-solid fa-user" style="margin-right: 8px; color: #333;"></i>
+                  <a style="text-decoration: none; color: #333;" (click)="changeGroupId(2, a.id)" class="hover-effect">
+                    Make User</a>
+                </li>
+
+              </ul>
+            </div>
+          </div>
+
+          <div class="position-relative ms-3" style="display: inline-block;">
+            <span style="cursor: pointer;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;padding: 9px;border-radius: 10px;">
+              <i class="fs-6 fa-solid fa-key" data-bs-target="#exampleModal1111" data-bs-toggle="modal"
+                (click)="ById(a.id)"></i>
+            </span>
+            <div class="modal fade" id="exampleModal1111" tabindex="-1" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog  modal-lg">
+                <div class="modal-content text-start">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Password</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form #userForm="ngForm" (ngSubmit)="editpasswordsss()">
+                      <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <label for="name">Email</label>
+                          <input type="text" class="form-control" id="email" [(ngModel)]="userByIdData.email"
+                            name="email" required />
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label>Password</label>
+                          <input type="text" class="form-control" id="password" [(ngModel)]="userByIdData.password"
+                            name="password" required />
+                        </div>
+                      </div>
+                      <button type="submit" class="btn btn-success m-1">Save</button>
+                      <button type="button" class="btn btn-danger" type="button" data-bs-dismiss="modal"
+                        aria-label="Close">cancel</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

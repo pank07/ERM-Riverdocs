@@ -1,0 +1,213 @@
+<!-- <div class="card">
+  <div class="card-body">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+          <div class="card">
+            <div class="card-header">
+              <div class="three">
+                <h1 style="font-size: 20px;">Resident Note</h1>
+                <div class="row">
+                  <div class="col-md-6 mb-2">
+                    <input type="text" class="form-control" placeholder="Search by Name"
+                      [(ngModel)]="residentNameFilter" (input)="applyResidentFilters()" />
+                  </div>
+                  <div class="col-md-6">
+                    <input type="date" class="form-control" [(ngModel)]="residentDateFilter"
+                      (change)="applyResidentFilters()" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="card-body">
+
+              <div class="d-flex flex-column">
+                <div class="container">
+                  <div class="row" *ngFor="let note of filteredClientNotes">
+                    <div class="col-md-12 mt-1">
+                      <div class="card border-0"
+                        style=" background-color: #f6c88b; box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px; border-radius: 20px 20px 20px 20px;">
+                        <div class=" card-body">
+                          <div class="d-flex justify-content-between">
+                            <span><i style="color:var(--sidebar-color);" class="fa-solid fa-user-tie"></i>
+                             <b></b> {{note.name}}</span>
+                           
+
+                            <span><i style="color:var(--sidebar-color);" class="fa-solid fa-calendar-days"></i>
+                              {{note.date_created | date:'short'}}
+                            </span>
+
+                          </div> <br>
+                          <div class="d-flex justify-content-between">
+                            <span> <i style="color: var(--sidebar-color);" class="fa-regular fa-comments"></i>
+                              {{note.description}}</span> <span>{{note.day}}</span>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 justify-content-end">
+          <div class="card">
+            <div class="card-header">
+              <div class="four">
+                <h1 style="font-size: 20px;">User Note</h1>
+                <div class="row">
+                  <div class="col-md-6 mb-2">
+                    <input type="text" class="form-control" placeholder="Search by Name" [(ngModel)]="userNameFilter"
+                      (input)="applyUserFilters()" />
+                  </div>
+                  <div class="col-md-6">
+                    <input type="date" class="form-control" [(ngModel)]="userDateFilter"
+                      (change)="applyUserFilters()" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="d-flex flex-column">
+                <div class="container">
+                  <div class="row" *ngFor="let a of  filteredUserNotes">
+                    <div class="col-md-12 mt-1 ">
+                      <div class="card border-0"
+                        style="background-color: #f6c88b; box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px; border-radius: 20px 20px 20px 20px;">
+                        <div class="card-body">
+                          <div class="d-flex justify-content-between">
+                            <span> <i style="color:var(--sidebar-color);" class="fa-solid fa-user-tie"></i>
+                              {{a.first_name}} {{a.last_name}}</span>
+                          
+
+                            <span><i style="color:var(--sidebar-color);" class="fa-solid fa-calendar-days"></i>
+                              {{a.datetime | date:'short'}}
+                            </span>
+
+                          </div> <br>
+                          <div class="d-flex justify-content-between">
+                          <span> <i style="color: var(--sidebar-color);" class="fa-regular fa-comments"></i>
+                            {{a.latestNotes}}</span> <span>{{a.day}}</span>
+                          </div>
+                      
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+
+<div class="card">
+  <div class="card-body">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Resident Notes Section -->
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h1 style="font-size: 20px;">Resident Note</h1>
+              <div class="row">
+                <div class="col-md-6 mb-2">
+                  <input type="text" class="form-control" placeholder="Search by Name"
+                    [(ngModel)]="residentNameFilter" (input)="applyResidentFilters()" />
+                </div>
+                <div class="col-md-6">
+                  <input type="date" class="form-control" [(ngModel)]="residentDateFilter"
+                    (change)="applyResidentFilters()" />
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="container">
+                <div class="row" *ngFor="let note of filteredClientNotes">
+                  <div class="col-md-12 mt-1">
+                    <div class="card border-0" style="background-color: #f6c88b; border-radius: 20px;">
+                      <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                          <span>
+                            <i style="color:var(--sidebar-color);" class="fa-solid fa-user-tie"></i> {{note.name}}
+                          </span>
+                          <span>
+                            <i style="color:var(--sidebar-color);" class="fa-solid fa-calendar-days"></i> {{note.date_created | date:'short'}}
+                          </span>
+                        </div>
+                        <br />
+                        <div class="d-flex justify-content-between">
+                          <span>
+                            <i style="color:var(--sidebar-color);" class="fa-regular fa-comments"></i> {{note.description}}
+                          </span>
+                          <span>{{note.day}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- User Notes Section -->
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h1 style="font-size: 20px;">User Note</h1>
+              <div class="row">
+                <div class="col-md-6 mb-2">
+                  <input type="text" class="form-control" placeholder="Search by Name"
+                    [(ngModel)]="userNameFilter" (input)="applyUserFilters()" />
+                </div>
+                <div class="col-md-6">
+                  <input type="date" class="form-control" [(ngModel)]="userDateFilter"
+                    (change)="applyUserFilters()" />
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="container">
+                <div class="row" *ngFor="let note of filteredUserNotes">
+                  <div class="col-md-12 mt-1">
+                    <div class="card border-0" style="background-color: #f6c88b; border-radius: 20px;">
+                      <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                          <span>
+                            <i style="color:var(--sidebar-color);" class="fa-solid fa-user-tie"></i> {{note.first_name}} {{note.last_name}}
+                          </span>
+                          <span>
+                            <i style="color:var(--sidebar-color);" class="fa-solid fa-calendar-days"></i> {{note.datetime | date:'short'}}
+                          </span>
+                        </div>
+                        <br />
+                        <div class="d-flex justify-content-between">
+                          <span>
+                            <i  style="color:var(--sidebar-color);" class="fa-regular fa-comments"></i> {{note.latestNotes}}
+                          </span>
+                          <span>{{note.day}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,358 @@
+<div class="container">
+
+  <div class="row">
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 d-flex justify-content-between">
+      <h2>PRN Medicine</h2>
+
+      <button type="button" class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <i class="fa-solid fa-plus"></i>
+      </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Add Pharmacy Here</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="inventoryMedicineForm" (ngSubmit)="onSubmit()">
+
+                <div class="row">
+
+                  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <label for="medicine">Medicine:</label>
+                    <select formControlName="medicine_id" class="form-select" (change)="onMedicineSelect($event)">
+                      <option value="" hidden selected>Select Medicine</option>
+                      <option *ngFor="let m of allMeds" [value]="m.id + ':' + m.medicine_name">
+                        {{ m.medicine_name }}
+                      </option>
+                    </select>
+                  </div>
+
+                  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" class="form-control" formControlName="quantity" />
+                  </div>
+
+                </div>
+
+
+
+                <div class="row">
+
+                  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <label for="supplier">Supplier:</label>
+
+                    <select formControlName="supplier_id" class="form-select" required="required">
+                      <option value=""></option>
+                      <option *ngFor="let p of pharmaData" [value]="p.id"> {{ p.pharmacy_name }} </option>
+                    </select>
+                  </div>
+
+
+                  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <label for="record">Record Level:</label>
+                    <input type="text" class="form-control" formControlName="record_level" />
+                  </div>
+
+                </div>
+                
+                <div class="row">
+
+                  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <label for="">MFG date</label>
+                    <input type="date" formControlName="mfg_date" class="form-control">
+                  </div>
+                  
+                  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <label for="">Expiry</label>
+                    <input type="date" formControlName="exp_date" class="form-control">
+                  </div>
+                  
+
+                </div>
+
+                <div class="row">
+
+                  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 mt-2">
+                    <button type="submit" class="btn btn-primary"
+                      [disabled]="inventoryMedicineForm.invalid">Submit</button>
+                  </div>
+
+                </div>
+
+
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane"
+            type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Inventory</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane"
+            type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Expired</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane"
+            type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Waste</button>
+        </li>
+
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab"
+          tabindex="0">
+          <div class="container mt-4">
+            <div class="row">
+
+              <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <input type="text" class="form-control mb-2" placeholder="Filter by Pharmacy Name"
+                  [(ngModel)]="filterKeys.pharmacy_name" (input)="filterData()" />
+              </div>
+
+              <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <input type="text" class="form-control mb-2" placeholder="Filter by Medicine Name"
+                  [(ngModel)]="filterKeys.medsname" (input)="filterData()" />
+              </div>
+
+              <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+
+                <input type="date" class="form-control me-2" [(ngModel)]="filterKeys.startDate"
+                  (change)="filterData()" />
+
+
+              </div>
+
+              <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <input type="date" class="form-control" [(ngModel)]="filterKeys.endDate" (change)="filterData()" />
+              </div>
+
+
+            </div>
+            <div class="row">
+              <div class="col-md-4 mb-4" *ngFor="let mt of filteredData">
+                <div class="card shadow-lg border-light rounded">
+                  <div class="card-header text-white d-flex justify-content-between">
+                    <p class=" mb-0">{{ mt.medicine_name }}</p>
+
+
+                  </div>
+                  <div class="card-body">
+                    <div class="d-flex flex-column">
+                      <p class="card-text">
+
+                        <strong>Pharmacy:</strong> {{ mt.supplier_name || 'N/A' }} <br>
+                        <strong>Quantity:</strong> <span [ngClass]="{'text-danger': mt.quantity < mt.record_level }">
+                          {{ mt.quantity }}
+                        </span> <br>
+                        <span>
+                          <button data-bs-toggle="modal" (click)="selectedMedId = mt.id " data-bs-target="#expiredModal"
+                            class="btn  btn-warning rounded-pill" style="font-size: smaller;">Expired</button>
+
+
+                          <!-- Expired Modal -->
+                          <div class="modal fade" id="expiredModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h1 class="modal-title fs-5" id="exampleModalLabel">Expired Med</h1>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <form [formGroup]="expiredMedForm" (ngSubmit)="expiredMEds(selectedMedId)">
+                                    <!-- <label for="">Expired Med Quantity</label>
+                                    <input type="text" formControlName="exp_count" class="form-control"> -->
+                                    This medicine is expired ?
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">No</button>
+                                      <button type="submit" class="btn btn-primary">Yes</button>
+                                    </div>
+                                  </form>
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+
+
+                          <button data-bs-toggle="modal" data-bs-target="#wasteModal"  (click)="setModalData(mt)"
+                            class="btn m-1 btn-info rounded-pill" style="font-size: smaller;">Waste</button>
+
+
+                          <!-- Expired Modal -->
+                          <div class="modal fade" id="wasteModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h1 class="modal-title fs-5" id="exampleModalLabel">Waste Med</h1>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <form [formGroup]="wasteMedForm" (ngSubmit)="wasteMEds()">
+                                    <input type="text" formControlName="medicine_id" hidden>
+                                    <input type="text" formControlName="medicine_name" hidden>
+                                    <input type="date" formControlName="mfg_date" class="form-control" hidden>
+                                    <!-- <label for="">Expiry</label> -->
+                                    <input type="date" formControlName="exp_date" class="form-control" hidden>
+                                    <label for="">Waste Med Quantity</label>
+                                    <input type="text" formControlName="waste_count" class="form-control">
+
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                      <button type="submit" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                  </form>
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+
+                        </span>
+                      </p>
+                      <p *ngIf="mt.order_id  == '' ">
+                        <button (click)="ByIdfunc(mt.id)" data-bs-toggle="modal" data-bs-target="#purchaseModal"
+                          class="btn btn-warning btn-sm">Purchase</button>
+                      </p>
+                      <p *ngIf="mt.order_id  != '' ">
+                        <small class="text-success">Order sended <br> OrderId - {{ mt.order_id }} <br> Order again
+                        </small> <small> <a href="" (click)="ByIdfunc(mt.id)" data-bs-toggle="modal"
+                            data-bs-target="#purchaseModal">Click here</a> </small>
+                      </p>
+                      <p class="text-muted">
+                        <small>
+                          <strong>Record Level:</strong>
+                          {{ mt.record_level || 'Not sent' }} <br>
+                        </small>
+                      </p>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+
+                 <!-- Purchase Modal -->
+              <div class="modal fade" id="purchaseModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content" *ngFor="let a of byIdData">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">Purchase Med</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form [formGroup]="purchaseMedicineForm" (ngSubmit)="purchaseMeds()">
+
+                        <div class="container">
+
+                          <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                              <label for="">Pharmacy</label>
+                              <p>{{ a.supplier_name }}</p>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                              <label for="">Medicine</label>
+                              <p>{{ a.medicine_name }}</p>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                              <label for="">Order Id</label>
+                              <input type="text" id="order_id" formControlName="order_id" class="form-control">
+                            </div>
+
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                              <label for="">Quantity</label>
+                              <input type="text" id="quantity" formControlName="quantity" class="form-control">
+                            </div>
+                            <input type="text" formControlName="pharmacy_id" [(ngModel)]="a.supplier_id" hidden>
+                            <input type="text" formControlName="meds_id" [(ngModel)]="a.medicine_id" hidden>
+                            <input type="text" formControlName="inventory_id" [(ngModel)]="a.id" hidden>
+
+                          </div>
+
+                        </div>
+
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                      </form>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+          <div class="container-fluid">
+
+            <div class="row">
+
+              <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" *ngFor="let ex of allExpData">
+                <div class="card m-1 shadow-lg border-light rounded">
+                  <div class="card-header text-white d-flex justify-content-between">
+                    <p class=" mb-0">{{ ex.medicine_name }}</p>
+                  </div>
+                  <div class="card-body">
+                    <strong>Quantity</strong> - {{ex.exp_count}} <br>
+                    <strong>Order Id</strong> - {{ex.order_id}} <br>
+                    <strong>Pharmacy</strong> - {{ex.pharmacy_name}}
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+        <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
+          <div class="container-fluid">
+
+            <div class="row">
+
+              <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" *ngFor="let w of allWasteData">
+                <div class="card m-1 shadow-lg border-light rounded">
+                  <div class="card-header text-white d-flex justify-content-between">
+                    <p class=" mb-0">{{ w.medicine_name }}</p>
+                  </div>
+                  <div class="card-body">
+                    <strong>Quantity</strong> - {{w.waste_count}} <br>
+                    <strong>Order Id</strong> - {{w.order_id}} <br>
+                    <strong>Pharmacy</strong> - {{w.pharmacy_name}}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+  </div>
+
+</div>

@@ -1,0 +1,388 @@
+<div class="container-fluid p-2">
+  <div class="row">
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 d-flex justify-content-between">
+      <span>
+        <h2 class="custom-heading">Rooms</h2>
+      </span>
+      <span>
+        <!-- Create Room modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Create Room
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content text-start">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Create Room Here</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form [formGroup]="createRoomForm" (ngSubmit)="submitRoom()">
+                  <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control"
+                      [ngClass]="{ 'is-invalid': createRoomForm.get('name')?.invalid && createRoomForm.get('name')?.touched }"
+                      id="name" formControlName="name" placeholder="Enter room name">
+                    <div class="invalid-feedback"
+                      *ngIf="createRoomForm.get('name')?.invalid && createRoomForm.get('name')?.touched">
+                      Name is required.
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="room_number" class="form-label">Room No</label>
+                    <input type="text" formControlName="room_number"
+                      [ngClass]="{ 'is-invalid': createRoomForm.get('room_number')?.invalid && createRoomForm.get('room_number')?.touched }"
+                      class="form-control" id="room_number" placeholder="Enter room No">
+                    <div class="invalid-feedback"
+                      *ngIf="createRoomForm.get('room_number')?.invalid && createRoomForm.get('room_number')?.touched">
+                      Room No is required.
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="">Select Users</label>
+                    <div class="multi-select-dropdown">
+                      <div class="selected-options">
+                        <span *ngFor="let user of selectedUsers" class="selected-item">
+                          {{ user.first_name }} {{ user.last_name }}
+                          <button type="button" class="unselect-btn" (click)="toggleSelection(user)">
+                            &times;
+                          </button>
+                        </span>
+                      </div>
+
+                      <div class="dropdown-search">
+                        <input type="text" [formControl]="searchControl" placeholder="Search..." class="search-input" />
+                      </div>
+
+                      <div class="dropdown-options">
+                        <label *ngFor="let user of filteredUsers" class="dropdown-item">
+                          <input type="checkbox" [checked]="isUserSelected(user)" (change)="toggleSelection(user)" />
+                          {{ user.first_name }} {{ user.last_name }}
+                        </label>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="mb-3">
+                    <label for="client_id" class="form-label">Select Residents</label>
+                    <div class="multi-select-dropdown">
+                      <div class="selected-options">
+                        <span *ngFor="let client of selectedClients" class="selected-item">
+                          {{ client.first_name }} {{ client.last_name }}
+                          <button type="button" class="unselect-btn" (click)="toggleSelectionClient(client)">
+                            &times;
+                          </button>
+                        </span>
+                      </div>
+
+                      <div class="dropdown-search">
+                        <input type="text" [formControl]="searchControl2" placeholder="Search..."
+                          class="search-input" />
+                      </div>
+ 
+                      <div class="dropdown-options">
+                        <label *ngFor="let client of filteredClients" class="dropdown-item">
+                          <input type="checkbox" [checked]="isClientSelected(client)"
+                            (change)="toggleSelectionClient(client)" />
+                          {{ client.first_name }} {{ client.last_name }} - {{ client.message }}
+                        </label>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea formControlName="description"
+                      [ngClass]="{ 'is-invalid': createRoomForm.get('description')?.invalid && createRoomForm.get('description')?.touched }"
+                      placeholder="Enter description" class="form-control" id="description" rows="3"></textarea>
+                  </div>
+                  <div class="invalid-feedback"
+                    *ngIf="createRoomForm.get('description')?.invalid && createRoomForm.get('description')?.touched">
+                    Description is required.
+                  </div>
+
+
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" [disabled]="createRoomForm.invalid" class="btn btn-primary">Create</button>
+                  </div>
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+
+
+
+
+
+  </div>
+
+
+  <div class="search-container mb-2 mt-4">
+    <input type="text" class="form-control" placeholder="Search Rooms" [(ngModel)]="searchText"
+      (input)="filterRooms()" />
+  </div>
+
+
+  <div class="row">
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center mt-4">
+      <div *ngIf="filteredRooms.length === 0 ">
+        <p>No rooms created yet..</p>
+        <img src="./../.././../../../assets/box.png" class="img-fluid w-25" alt="">
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="row">
+
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" *ngFor="let room of filteredRooms">
+      <div class="card mt-4" style="cursor: pointer;">
+        <div class="card-header d-flex justify-content-between">
+          <span (click)="roomDetails(room.id)" class="fw-bold">No : {{ room.room_number }} / {{ room.name }}</span>
+          <span><i (click)="roomByID(room.id)" data-bs-toggle="modal" data-bs-target="#deleteRoom"
+              class="fa-solid fa-trash m-2 text-danger"></i>
+            <!-- Modal -->
+            <div class="modal fade" id="deleteRoom" tabindex="-1" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content" *ngFor="let dd of userByIdData">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Room</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    Are you sure you want to delete room {{ dd.room_number }} ?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" (click)="roomDelete(dd)" class="btn btn-primary">Yes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+            <i (click)="roomByIDupdate(room.id)" data-bs-toggle="modal" data-bs-target="#editRoom"
+              class="fa-solid fa-pen-to-square m-2"></i>
+            <!-- Edit Modal -->
+            <div class="modal fade" id="editRoom" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Room</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+
+                    <form [formGroup]="updateRoomForm" (ngSubmit)="updateusers()">
+                      <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control"
+                          [ngClass]="{ 'is-invalid': updateRoomForm.get('name')?.invalid && updateRoomForm.get('name')?.touched }"
+                          id="name" formControlName="name" placeholder="Enter room name">
+                        <div class="invalid-feedback"
+                          *ngIf="updateRoomForm.get('name')?.invalid && updateRoomForm.get('name')?.touched">
+                          Name is required.
+                        </div>
+                      </div>
+                      <div class="mb-3">
+                        <label for="room_number" class="form-label">Room No</label>
+                        <input type="text" formControlName="room_number"
+                          [ngClass]="{ 'is-invalid': updateRoomForm.get('room_number')?.invalid && updateRoomForm.get('room_number')?.touched }"
+                          class="form-control" id="room_number" placeholder="Enter room No">
+                        <div class="invalid-feedback"
+                          *ngIf="updateRoomForm.get('room_number')?.invalid && updateRoomForm.get('room_number')?.touched">
+                          Room No is required.
+                        </div>
+                      </div>
+                      <small class="text-danger">Please select user *</small>
+                      <div class="mb-3">
+                        <label for="">Select Users</label>
+                        <div class="multi-select-dropdown">
+                          <div class="selected-options">
+                            <span *ngFor="let user of selectedUsersUpdate" class="selected-item">
+                              {{ user.first_name }} {{ user.last_name }}
+                              <button type="button" class="unselect-btn" (click)="toggleSelectionUpdate(user)">
+                                &times;
+                              </button>
+                            </span>
+                          </div>
+
+                          <div class="dropdown-search">
+                            <input type="text" [formControl]="searchControl" placeholder="Search..."
+                              class="search-input" />
+                          </div>
+
+                          <div class="dropdown-options" *ngIf="searchControl.value">
+                            <label *ngFor="let user of filteredUsers" class="dropdown-item">
+                              <input type="checkbox" [checked]="isUserSelectedUpdate(user)"
+                                (change)="toggleSelectionUpdate(user)" />
+                              {{ user.first_name }} {{ user.last_name }}
+                            </label>
+                          </div>
+                        </div>
+
+
+                      </div>
+                      <small class="text-danger">Please select resident *</small>
+                      <div class="mb-3">
+                        <label for="client_id" class="form-label">Select Residents</label>
+                        <div class="multi-select-dropdown">
+                          <div class="selected-options">
+                            <span *ngFor="let client of selectedClientsUpdate" class="selected-item">
+                              {{ client.first_name }} {{ client.last_name }}
+                              <button type="button" class="unselect-btn" (click)="toggleSelectionClientUpdate(client)">
+                                &times;
+                              </button>
+                            </span>
+                          </div>
+
+                          <div class="dropdown-search">
+                            <input type="text" [formControl]="searchControl2" placeholder="Search..."
+                              class="search-input" />
+                          </div>
+
+                          <div class="dropdown-options" *ngIf="searchControl2.value">
+
+                            <label *ngFor="let client of filteredClients" class="dropdown-item">
+                              <input type="checkbox" [checked]="isClientSelectedUpdate(client)"
+                                (change)="toggleSelectionClientUpdate(client)" />
+                              {{ client.first_name }} {{ client.last_name }} - {{ client.message }}
+                            </label>
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea formControlName="description"
+                          [ngClass]="{ 'is-invalid': updateRoomForm.get('description')?.invalid && updateRoomForm.get('description')?.touched }"
+                          placeholder="Enter description" class="form-control" id="description" rows="3"></textarea>
+                      </div>
+                      <div class="invalid-feedback"
+                        *ngIf="updateRoomForm.get('description')?.invalid && updateRoomForm.get('description')?.touched">
+                        Description is required.
+                      </div>
+
+
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" [disabled]="updateRoomForm.invalid"
+                          class="btn btn-primary">Update</button>
+                      </div>
+                    </form>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </span>
+
+        </div>
+
+        <div class="card-body">
+          <div class="d-flex justify-content-between">
+            <span><i class="fa-solid fa-book"></i> {{ room.description || 'No description available' }}</span>
+            <!-- <span><i class="fa-solid fa-file"></i> {{ room.recent_notes || 'No recent notes' }} </span> -->
+            <span class=" position-relative">
+              <i class="fa-solid fa-file"></i> {{ room.recent_notes || 'No recent notes' }}
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {{room.notes_count}}
+              </span>
+            </span>
+          </div>
+
+          <div class="d-flex justify-content-between mt-4">
+
+            <span class=" position-relative">
+              <i class="fa-solid fa-comment"></i> {{ room.recent_comment || 'No comments available' }}
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {{room.comment_count}}
+              </span>
+            </span>
+          </div>
+
+          <hr>
+
+          <div class="row">
+
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+              <p> <i class="fa-solid fa-user me-2"></i>Users</p>
+
+
+              <!-- <div class="popover-container" *ngFor="let user of getUserDetails2(room.userNames)"
+                style="display: inline-flex;">
+                <button class="popover-button">
+                  {{ user.initials }}
+                </button>
+                <div class="popover-content">
+                  <p>
+                    {{ user.fullName }}
+                  </p>
+                  <ng-template #loading>
+                    <p>Loading...</p>
+                  </ng-template>
+                </div>
+              </div> -->
+
+              <div class="popover-container" *ngFor="let user of room.userNames | userDetails"
+                style="display: inline-flex;">
+                <button (click)="ByIds(room.user_ids)" class="popover-button">{{ user.initials }}</button>
+                <div class="popover-content">
+                  <p>{{ user.fullName }}</p>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+              <p><i class="fa-solid fa-hospital-user me-2"> </i> Resident </p>
+
+              <!-- <div class="popover-container" *ngFor="let userId of room.client_id.split(',')"
+                style="display: inline-flex;">
+                <button class="popover-button" (click)="ByIds(room.user_ids)" (mouseenter)="fetchUserDetails(userId)"
+                  [attr.data-user-id]="userId">
+                  {{ getInitials(userId) }}
+                </button>
+                <div class="popover-content">
+                  <p *ngIf="userDetails[userId]; else loading">
+                    {{ userDetails[userId].first_name }} {{ userDetails[userId].last_name }}
+                  </p>
+                  <ng-template #loading>
+                    <p>Loading...</p>
+                  </ng-template>
+                </div>
+              </div> -->
+
+              <div class="popover-container" *ngFor="let user of room.clientName | userDetails"
+                style="display: inline-flex;">
+                <button (click)="ByIds2(room.client_id)" class="popover-button">{{ user.initials }}</button>
+                <div class="popover-content">
+                  <p>{{ user.fullName }}</p>
+                </div>
+              </div>
+
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

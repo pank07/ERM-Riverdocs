@@ -1,0 +1,640 @@
+.main-border{
+    border: 1px solid #b1adad;
+    border-radius: 20px;
+    padding: 10px;
+}
+.header-content button{
+    border: 0px;
+    background-color: transparent;
+    padding: 10px 10px;
+}
+.header-content button:hover{
+    background-color: #ffecf2;
+}
+.header-content a{
+    text-decoration: none;
+    color: #686868;
+}
+/* general-section-start */
+.general-content .card{
+    border: 0px;
+    background-color: transparent;
+    
+}
+.general-content .card img{
+    width: 20%;
+}
+.card-data{
+    display: flex;
+    text-align: center;
+}
+.card-data a{
+    color: black;
+    margin-left: auto;
+    font-size: 20px;
+}
+.ndn{
+    background-color: var(--header-color);
+    color: white;
+    width: 100px;
+    border-radius: 20px;
+}
+.ndn h5{
+    font-size: 15px;
+    padding: 8px 20px;
+    margin: 0px;
+}
+.general-content .card-title{
+    text-align: center;
+}
+.shadow_new{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+.general-content .card-text{
+    text-align: center;
+}
+.card td{
+    border: 0px;
+    background-color: transparent;
+}
+.border{
+    border-radius: 20px;
+}
+.Facility{
+    height: auto;
+    margin-bottom: 20px;
+}
+.ins{
+    height: auto;
+    margin-bottom: 20px;
+}
+.ins-data p{
+    background-color: #25e1e124;
+    padding: 10px 0px;
+    /* width: 400px; */
+    border-radius: 15px;
+    border: 1 px solid red;
+    margin: 0 auto;
+    margin: 0px 40px;
+}
+
+@media (max-width: 1080px){
+    .general-row{
+        height: auto !important;
+    }
+    .Facility{
+        margin-top: 20px !important;
+    }
+}
+/* general-section-end */
+/* medical-section-start */
+.medical-content .card{
+    border: 0px;
+    background-color: transparent; 
+}
+.diag-data{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+.dia-main{
+    text-decoration: none;
+    color: black;
+}
+.diag-ico{
+    display: flex;
+    align-items: baseline;
+
+}
+.diag-ico a{
+    margin-right: 10px;
+    color: black;
+}
+.diag-data a{
+    color: black;
+}
+/* .diag-ico p{
+    background-color: #ffca22;
+    padding: 2px 5px;
+    border-radius: 20px;
+    color: white;
+    font-weight: bolder;
+    font-size: 10px;
+    letter-spacing: 1px;
+    margin-right: 12px;
+} */
+
+
+
+.diag-ico p {
+    padding: 2px 5px;
+    border-radius: 20px;
+    color: white;
+    font-weight: bolder;
+    font-size: 10px;
+    letter-spacing: 1px;
+    margin-right: 12px;
+}
+
+.moderate {
+    background-color: #ffca22; /* Yellow */
+}
+
+.mild {
+    background-color: #28a745; /* Green */
+}
+
+.severe {
+    background-color: #ff5733; /* Orange */
+}
+
+
+
+.ire i{
+    color: var(--header-color);
+}
+/* medical-setion-end */
+/* contact-section-start */
+.contact-content .card{
+    border: 0px;
+    background-color: transparent; 
+}
+.con-data p{
+    background-color: #25e1e124;
+    padding: 10px 0px;
+    /* width: 400px; */
+    border-radius: 15px;
+    margin: 0 auto;
+    margin: 0px 40px;
+}
+
+.card-data hr{
+    color: black !important;
+}
+
+
+
+
+.multi-select-dropdown {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    max-width: auto;
+  }
+  
+  .selected-options {
+    margin-bottom: 10px;
+  }
+  
+  .selected-item {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 5px 10px;
+    margin: 2px;
+    border-radius: 3px;
+  }
+  
+  .unselect-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-weight: bold;
+    margin-left: 5px;
+    cursor: pointer;
+  }
+  
+  .dropdown-options {
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  
+  .dropdown-item {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+  }
+  
+  input[type='checkbox'] {
+    margin-right: 10px;
+  }
+
+
+
+  /* mqayank sir css */
+
+  .status-row {
+    margin-bottom: 1rem;
+  }
+  
+  .status-missed {
+    color: #dc3545; /* Red for missed */
+    font-weight: bold;
+  }
+  
+  .status-to-be-given {
+    color: #ffc107; /* Yellow for to-be-given */
+    font-weight: bold;
+  }
+  
+  .status-given {
+    color: #28a745; /* Green for given */
+    font-weight: bold;
+  }
+  
+  .missed-icon {
+    color: #dc3545; /* Red for missed */
+    margin-right: 0.5rem;
+  }
+  
+  .to-be-given-icon {
+    color: #ffc107; /* Yellow for to-be-given */
+    margin-right: 0.5rem;
+  }
+  
+  .given-icon {
+    color: #28a745; /* Green for given */
+    margin-right: 0.5rem;
+  }
+  
+  .no-data {
+    text-align: center;
+    margin: 2rem;
+    font-size: 1.2rem;
+    color: #888;
+  }
+  
+
+  #detailsTable {
+    display: none; /* Hidden by default */
+  }
+
+
+  .mar-container {
+    width: 100%;
+    padding: 20px;
+    background: #f5f5f5; /* Light gray background */
+    border: 1px solid #ccc;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+    font-family: Arial, sans-serif;
+    color: #333; /* Dark gray text color */
+  }
+  
+  .mar-title {
+    text-align: center;
+    font-size: 26px;
+    margin-bottom: 20px;
+    color: #222; /* Slightly darker text */
+    font-weight: bold;
+  }
+  
+  .mar-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .mar-th,
+  .mar-td {
+    border: 1px solid #aaa; /* Slightly darker borders */
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+    color: #222; /* Dark text for cells */
+  }
+  
+  .mar-th {
+    background-color: #1f2937; /* Dark header background */
+    color: #f9fafb; /* Light text on dark background */
+    font-weight: bold;
+  }
+  
+  .mar-header {
+    background-color: #2b3b63; /* Dark blue background */
+    color: #f5f5f5; /* Light gray text */
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .mar-button {
+    display: block;
+    margin: auto;
+    padding: 10px 20px;
+    background-color: #1f2937; /* Dark button background */
+    color: #f5f5f5; /* Light text */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .mar-button:hover {
+    background-color: #111827; /* Even darker on hover */
+  }
+  
+  .mar-details {
+    text-align: left;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #333; /* Dark gray for details */
+  }
+  
+
+  /* Container for Hidden Report */
+.hidden-report {
+  display: none; /* Completely hide the report on screen */
+}
+
+.mar-button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #1f2937; /* Dark blue button */
+  color: #f5f5f5; /* Light text */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.mar-button:hover {
+  background-color: #111827; /* Even darker blue on hover */
+}  
+  
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
+    justify-content: center;
+  }
+  
+  .card-container .card {
+    width: 350px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    background-color: #fff;
+  }
+  
+  .card-container  .card-header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    font-size: 1.05rem;
+    font-weight: bold;
+  }
+  
+  .card-container .card-body {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+
+
+  /*  Ankit facesheet css  */
+
+  .facesheet-container {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Header Section */
+.facesheet-header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid #000;
+    /* padding-bottom: 15px; */
+}
+
+.facesheet-header h1 {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #333;
+}
+
+.facesheet-details {
+    /* text-align: right; */
+   
+    font-size: 0.9em;
+}
+.facesheet-details p {
+  /* text-align: right; */
+  margin-bottom: 0px;
+
+}
+
+/* Profile Info */
+.profile-info {
+    display: flex;
+    /* align-items: center; */
+    /* gap: 25px; */
+    /* padding: 20px 0; */
+}
+
+.profile-info img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #ccc;
+}
+
+
+.profile-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.profile-details span {
+    display: block;
+    font-size: 1em;
+    color: #555;
+}
+
+.badge-status {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #000;
+    color: white;
+    border-radius: 5px;
+    font-size: 0.85em;
+}
+
+.badge-ambulatory {
+    background-color: #28a745;
+}
+
+/* Tables Section */
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+}
+
+.custom-table th, .custom-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+.custom-table th {
+    background-color: #333;
+    color: white;
+    font-weight: bold;
+}
+
+.custom-table td {
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.medical-section-header {
+    margin-top: 7px;
+    font-size: 1.4em;
+    border-bottom: 2px solid #000;
+    /* padding-bottom: 8px; */
+    color: #333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .profile-info {
+        flex-direction: column;
+        text-align: center;
+    }
+    .profile-details {
+        grid-template-columns: 1fr;
+    }
+    .facesheet-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    .custom-table th, .custom-table td {
+        font-size: 0.8em;
+        padding: 8px;
+    }
+}
+
+.border-red {
+  border: 2px solid rgba(255, 0, 0, 0.596);
+}
+
+.border-green {
+  border: 2px solid green;
+}
+
+
+
+
+
+
+/* mayank sierr mar  */
+
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 15px;
+ 
+}
+.header-section h1 {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+  color: #333;
+}
+.header-logo img {
+  height: 50px;
+}
+.info-row {
+  padding: 10px 15px;
+  color: #333;
+  border-bottom: 2px solid #ddd;
+}
+.info-card h6 {
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.info-card p {
+  margin: 0;
+  font-size: 13px;
+}
+.legend {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+.legend span {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+}
+.legend span::before {
+  content: '';
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+  border: 1px solid #000;
+  border-radius: 3px;
+}
+
+.medication-header {
+  background-color: #343a40;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.medication-details {
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  color: #333;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+.table-container-main {
+  font-size: 14px; /* Smaller font size */
+}
+
+.table-bordered th,
+.table-bordered td {
+  border: 1px solid #ddd;
+  vertical-align: middle;
+  padding: 2px; /* Smaller padding */
+}
+
+.highlight {
+  background-color: #f8d7da;
+}
+
+.icon-missed {
+  color: red;
+  font-weight: bold;
+}
+
+.table th,
+.table td {
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .table-container {
+    font-size: 10px; /* Further reduce font size for mobile */
+  }
+}

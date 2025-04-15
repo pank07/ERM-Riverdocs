@@ -1,0 +1,729 @@
+<div class="container-fluid p-3" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; border-radius: 10px;">
+  <div class="row align-items-center">
+    <div class="col-12 d-flex justify-content-between align-items-center">
+      <h2 class=" text-center flex-grow-1">Resident Details</h2>
+      <button class="btn btn-primary me-4" data-bs-toggle="modal" data-bs-target="#facesheetmodel">Facesheet
+        Details</button>
+      <div class="modal fade" id="facesheetmodel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Facesheet Details</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+              <div class="container col-sm-10">
+                <div class="row">
+                  <div class="col-12 text-center">
+                    <h3>Face Sheet Add</h3>
+                  </div>
+                </div>
+
+
+                <form [formGroup]="faceSheetForm" (ngSubmit)="addpostfacesheets()">
+                  <!-- Facility Section -->
+                  <div class="row border p-3 mb-3">
+                    <div class="col-12">
+                      <label for="facilityName" class="form-label">Name of Facility:</label>
+                      <input type="text" formControlName="facility_name" class="form-control"
+                        value="HOME OF COMFORT LLC.">
+                    </div>
+                  </div>
+
+                  <!-- Personal Information Section -->
+                  <div class="row border p-3 mb-3">
+                    <h5>Personal Information</h5>
+                    <div class="col-6 mb-3">
+                      <label for="name" class="form-label">Name:</label>
+                      <input type="text" formControlName="name" class="form-control">
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="dob" class="form-label">DOB:</label>
+                      <input type="date" formControlName="dob" class="form-control">
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="gender" class="form-label">Gender:</label>
+                      <div>
+                        <input type="radio" formControlName="gender" value="Male"> Male
+                        <input type="radio" formControlName="gender" value="Female" class="ms-4"> Female
+                      </div>
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="uci" class="form-label">UCI#:</label>
+                      <input type="text" formControlName="uci" class="form-control">
+                    </div>
+
+                    <div class="col-6 mb-3">
+                      <label for="room_number" class="form-label">Room#:</label>
+                      <input type="text" formControlName="room_number" class="form-control">
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="bed_number" class="form-label">Bed#:</label>
+                      <input type="text" formControlName="bed_number" class="form-control">
+                    </div>
+                  </div>
+
+                  <!-- Insurance Section -->
+                  <div class="row border p-3 mb-3">
+                    <h5>Insurance Information</h5>
+                    <div class="col-6 mb-3">
+                      <label for="insurance_id" class="form-label">Medical Insurance/Member ID#:</label>
+                      <input type="text" formControlName="insurance_id" class="form-control">
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="other_insurance" class="form-label">Other Insurance:</label>
+                      <input type="text" formControlName="other_insurance" class="form-control">
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="state_benefits" class="form-label">State Benefits:</label>
+                      <input type="text" formControlName="state_benefits" class="form-control">
+                    </div>
+                  </div>
+
+                  <!-- Placement Details Section -->
+                  <div class="row border p-3 mb-3">
+                    <h5>Placement Details</h5>
+                    <div class="col-6 mb-3">
+                      <label for="placement_date" class="form-label">Date of Placement:</label>
+                      <input type="date" formControlName="placement_date" class="form-control">
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="previous_address" class="form-label">Previous Address:</label>
+                      <input type="text" formControlName="previous_address" class="form-control">
+                    </div>
+                  </div>
+
+
+
+                  <!-- Physical Description Section -->
+                  <div class="row border p-3 mb-3">
+                    <h5>Physical Description</h5>
+                    <div class="col-6 mb-3">
+                      <label for="weight" class="form-label">Weight:</label>
+                      <input type="text" formControlName="weight" class="form-control">
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="height" class="form-label">Height:</label>
+                      <input type="text" formControlName="height" class="form-control">
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="eye_color" class="form-label">Eyes Color:</label>
+                      <input type="text" formControlName="eye_color" class="form-control">
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="hair_color" class="form-label">Hair Color:</label>
+                      <input type="text" formControlName="hair_color" class="form-control">
+                    </div>
+                  </div>
+
+                  <!-- Medical Information Section -->
+                  <div class="row border p-3 mb-3">
+                    <h5>Medical Information</h5>
+                    <div class="col-6 mb-3">
+                      <label for="diagnosis" class="form-label">Diagnosis:</label>
+                      <textarea formControlName="diagnosis" class="form-control"></textarea>
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="diet" class="form-label">Diet:</label>
+                      <textarea formControlName="diet" class="form-control"></textarea>
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="food_restrictions" class="form-label">Food Restrictions:</label>
+                      <textarea formControlName="food_restrictions" class="form-control"></textarea>
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="medical_needs" class="form-label">Medical Needs:</label>
+                      <textarea formControlName="medical_needs" class="form-control"></textarea>
+                    </div>
+                  </div>
+
+
+                  <!-- Medications Section -->
+                  <div class="row border p-3 mb-3">
+                    <h5>Medications</h5>
+                    <div class="col-4 mb-3">
+                      <label for="medication_name" class="form-label">Medication Name:</label>
+                      <input type="text" formControlName="medication_name" class="form-control">
+                    </div>
+                    <div class="col-4 mb-3">
+                      <label for="dosage" class="form-label">Dosage:</label>
+                      <input type="text" formControlName="dosage" class="form-control">
+                    </div>
+                    <div class="col-4 mb-3">
+                      <label for="frequency" class="form-label">Frequency:</label>
+                      <input type="text" formControlName="frequency" class="form-control">
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="prescribingMD" class="form-label">Prescribing MD:</label>
+                      <input type="text" formControlName="prescribing_md" class="form-control">
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="allergies" class="form-label">Allergic to:</label>
+                      <textarea formControlName="allergies" class="form-control"></textarea>
+                    </div>
+                  </div>
+                  <!-- Professional Contacts Section -->
+                  <div class="row border p-3 mb-3">
+                    <h5>Professional Contacts</h5>
+                    <div class="col-6 mb-3">
+                      <label for="physician" class="form-label">Physician:</label>
+                      <input type="text" formControlName="physician" class="form-control">
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="dentist" class="form-label">Dentist:</label>
+                      <input type="text" formControlName="dentist" class="form-control">
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="psychiatrist" class="form-label">Psychiatrist:</label>
+                      <input type="text" formControlName="psychiatrist" class="form-control">
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="pharmacy" class="form-label">Pharmacy:</label>
+                      <input type="text" formControlName="pharmacy" class="form-control">
+                    </div>
+                  </div>
+                  <!-- Dangerous Propensities Section -->
+                  <div class="row border p-3 mb-3">
+                    <h5>Dangerous Propensities</h5>
+                    <div class="col-12 mb-3">
+                      <label for="dangerous_propensities" class="form-label">Does this client have any dangerous
+                        propensities?</label>
+                      <textarea formControlName="dangerous_propensities" class="form-control"></textarea>
+                    </div>
+                  </div>
+                  <!-- Submit Button -->
+                  <div class="row">
+                    <div class="col-12 text-center">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary"
+                        [disabled]="faceSheetForm.pristine || faceSheetForm.invalid">Save changes</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-2" *ngFor="let a of allData">
+      <img [src]="a.profile || '../assets/profilephoto.jpg'" alt="User Avatar" class="rounded-circle img-fluid"
+        style="height: 155px; width: 155px;">
+    </div>
+    <div class="col-md-10">
+      <div class="row">
+        <div class="row mt-4">
+          <div class="col-md-3 mb-2">
+            <div class="card" (click)="openRoutineTab()">
+              <div class="card-body">
+                <h5 class="card-title">Routine</h5>
+                <p class="card-text">{{routinelength || 0}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 mb-2">
+            <div class="card" (click)="opentaskTab()">
+              <div class="card-body">
+                <h5 class="card-title">Task</h5>
+                <p class="card-text">{{tasklength || 0}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 mb-2">
+            <div class="card" (click)="openmedsTab()">
+              <div class="card-body">
+                <h5 class="card-title">Notes</h5>
+                <p class="card-text">{{getnotessdatalength || 0}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 mb-2">
+            <div class="card" (click)="openmildstoneTab()">
+              <div class="card-body">
+                <h5 class="card-title">Visibility Logs</h5>
+                <p class="card-text">{{mildstonelength || 0}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+      </div>
+    </div>
+  </div>
+  <hr>
+
+
+
+
+  <div class="row card-view" *ngFor="let a of allData">
+    <div class="col-md-4">
+
+      <div class="cardss card   h-80">
+        <div class="card-header d-flex justify-content-between">
+          <small class="fw-bold"> </small>
+        </div>
+        <div class="card-body">
+          <p class="custom"><small> <b>Name:</b></small> {{a.first_name}}</p>
+          <p class="custom"><small> <b>User Type:</b></small> {{a.group_name}}</p>
+          <p class="custom"><small> <b>Contact:</b></small> {{a.email}}</p>
+          <!-- <p><strong>Status:</strong> <span  style="background-color: #218838; color: white; border-radius: 10px;  padding: 3px;">{{a.active}}</span></p>  -->
+        </div>
+
+      </div>
+
+
+    </div>
+    <div class="col-md-4 mt-2">
+
+      <div class="cardss card   h-80">
+        <div class="card-header d-flex justify-content-between">
+          <small class="fw-bold"> </small>
+        </div>
+        <div class="card-body">
+          <p class="custom"><small> <b>Date of Birth:</b></small> {{a.date_of_birth | date:'dd-MM-yyyy'}}</p>
+          <p class="custom"> <small> <b>Date of Joining:</b></small> {{a.date_of_joining | date:'dd-MM-yyyy'}}</p>
+          <p class="custom"><small> <b>Designation:</b></small>  {{a.designation}}</p>
+        </div>
+
+      </div>
+
+
+    </div>
+     <div class="col-md-4 mt-2" *ngIf="getnotessdatass.length > 0; else noData" >
+      <div class="cardss card  h-80" *ngFor="let item of getnotessdatass">
+        <div class="card-header d-flex justify-content-between " style="padding: 4px;">
+         <small>{{item.user_id  }} {{item.time}}</small>  
+         <small> {{item.time}}</small>   
+
+         
+         <small>Notes</small> 
+        </div>
+        <div class="card-body">
+          <p class="customsss"> <small>{{item.description }}</small>
+
+         <small>  <span *ngIf="!item.expanded">
+              {{ item.description | slice:0:20}} ....
+              <a href="#" (click)="item.expanded = true; $event.preventDefault()"><i class="fa-regular fa-comment-dots"></i></a> <br>
+              
+            </span>
+          </small> 
+          <small>
+            <span *ngIf="item.expanded">
+              {{ item.description }}
+              <a href="#" (click)="item.expanded = false; $event.preventDefault()"><i class="fa-regular fa-comment-dots"></i></a>
+            </span>
+          </small> 
+          </p>
+
+        </div>
+      </div>
+    </div> 
+    <ng-template #noData>
+      <div class="col-md-4">
+        <p>No notes available.</p>
+      </div>
+    </ng-template>
+    
+    
+  </div>
+
+
+
+  <div class="row mt-3">
+
+    <div class="col-md-12">
+      <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <button class="nav-link active" id="nav-todayroutine-tab" data-bs-toggle="tab"
+            data-bs-target="#nav-todayroutine" type="button" role="tab" aria-controls="nav-todayroutine"
+            aria-selected="false">Today routine</button>
+          <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button"
+            role="tab" aria-controls="nav-profile" aria-selected="false">Routine</button>
+          <button class="nav-link" id="nav-mildstone-tab" data-bs-toggle="tab" data-bs-target="#nav-mildstone"
+            type="button" role="tab" aria-controls="nav-mildstone" aria-selected="false">Visibility Logs</button>
+          <button class="nav-link" id="nav-Notes-tab" data-bs-toggle="tab" data-bs-target="#nav-Notes" type="button"
+            role="tab" aria-controls="nav-Notes" aria-selected="false">Notes</button>
+        </div>
+      </nav>
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-todayroutine" role="tabpanel"
+          aria-labelledby="nav-todayroutine-tab">
+          <div class="col-lg-12 col-md-12 d-flex  gap-2  mt-2 "
+            style="background-color: #F7F7F7; white-space: wrap ; height: 70px; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px; border-radius: 10px;">
+            <h5 class="fs-4 mt-3 text-center p-2">Residents Todays Routine</h5>
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-4 mt-3">
+              </div>
+              <div class="col-md-4"></div>
+              <div class="col-md-10 mt-3 mb-2" *ngFor=" let a of userByIdDatasss; let i = index"> 
+                <div class="card border-0"
+                  style="box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px; border-radius: 20px 20px 0px 0px;">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-start">
+                      <div class="col-md-3">
+                        <h5><i class="fa-regular fa-clock"></i> {{a.time}}</h5>
+                        <button style="border-top-left-radius:16px; border-bottom-right-radius: 16px;"> <span
+                            class="fs-6 fw-semibold">{{a.milestonename}} </span></button>
+                      </div>
+                      <div class="col-md-9">
+                        <div class="justify-content-between d-flex ">
+                          <span class="fs-6 fw-semibold"><i class="fa-solid fa-user-tie"></i> {{a.clientname}} </span>
+                          <span class="fs-6 fw-semibold"><i class="fa-solid fa-pills"></i> {{a.medicinename}} </span>
+                          <div class="pretty p-svg p-curve mt-3">
+                            <input #checkbox  [checked]="a.status == 3" type="checkbox"  (change)="statusUpdate(a,checkbox)"  />
+                            <div class="state p-success">
+                              <svg class="svg svg-icon" viewBox="0 0 20 20">
+                                <path
+                                  d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z"
+                                  style="stroke: white;fill:white;"></path>
+                              </svg>
+                              <label></label>
+                            </div>
+                          </div>
+                          <select class="btn "   [ngStyle]="{
+                            'background-color': a.status === 1 ? 'red' : 
+                            a.status === 2 ? 'orange' : 
+                            a.status === 3 ? 'green' : 
+                            a.status === 4 ? 'red' : 'orange',
+                            'color': 'white', 
+                            'border': '1px solid',
+                            'border-color': a.status === 1 ? 'red' : 
+                                            a.status === 2 ? 'orange' : 
+                                            a.status === 3 ? 'green' : 
+                                            a.status === 4 ? 'red' : 'yellow', 
+                            'border-radius': '10px', 
+                            'box-shadow': 'rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px' 
+                          }"
+                         
+                          name="clientStatus" id="clientStatus" (change)="statusUpdatefordrop($event, a)">
+                    <option  selected hidden *ngIf="a.status == 1" > Missing  </option>
+                    <option   selected hidden *ngIf="a.status  == 2" > TO DO </option>
+                    <option   selected hidden *ngIf="a.status  == 3" > Done  </option>
+                    <option   selected hidden *ngIf="a.status  == 4" > Cancelled</option>
+                    <option   value="4">Cancelled</option>
+                  </select>
+                          <button type="button" class="btn btn-sm  text-light"
+                            style="background-color: #34395e;">{{a.priority}}</button>
+                          <span data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="setCommentFormData(a)">
+                            <i class="fa-regular fa-comments"></i>
+                            <span class="top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                              {{a.comment_count || 0 }}
+                            </span>
+                          </span>
+                        </div>
+                        <br>
+                        <span class="fs-6 text-secondary fw-bolder">{{a.task_message}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade " id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+        </div>
+        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+          <div class="col-lg-12 col-md-12 d-flex  gap-2  mt-2 "
+            style="background-color: #F7F7F7; white-space: wrap ; height: 70px; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px; border-radius: 10px;">
+            <h5 class="fs-4 mt-3 text-center p-2">Residents Routine</h5> <span><button type="button"
+                routerLink="/Admin/addtask" class="btn btn-primary mt-3"><span><i
+                    class="fa-sharp fa-solid fa-plus"></i></span> Add</button></span>
+          </div>
+          <div class="mt-2"
+            style="overflow-x: scroll; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; border-radius: 10px;">
+            <table class="table table-bordered table-hover table-striped ">
+              <thead class="" style="font-size: 13px; text-wrap: nowrap; ">
+                <tr>
+                  <th>Id</th>
+                  <th>Name</th>
+                  <th>Visibility Title</th>
+                  <th>Description</th>
+                  <th>Priority</th>
+                  <th>Start Date</th>
+                  <th>End Date</th>
+                  <th>Time</th>
+                  <th>Status</th>
+                  <th>Task Message</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody style="text-wrap: nowrap;" class="">
+                <tr *ngFor="let task of getTasksOFUserss ; let i=index;">
+                  <td>{{i + 1}}</td>
+                  <td>{{task.name }}</td>
+                  <td>{{task.milestone_id }}</td>
+                  <td>{{task.description }}</td>
+                  <td>{{task.priority }}</td>
+                  <td>{{task.start_date | date:'dd-MM-yyyy' }}</td>
+                  <td>{{task.due_date | date:'dd-MM-yyyy' }}</td>
+                  <td>{{task.time }}</td>
+                  <td>{{task.status }}</td>
+                  <td>{{task.task_message }}</td>
+                  <td>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal" (click)="byId(task.id)" type="button" ><i class="fa-solid fa-pen-to-square"></i></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- Edit modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Pharmacy</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+           <form [formGroup]="editTaskForm">
+              <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" id="name" class="form-control" formControlName="name" />
+              </div>
+              <div class="mb-3">
+                <label>Priority</label>
+                        <select id="priority" formControlName="priority" class="form-control">
+                            <option value="" selected hidden>Select Priority</option>
+                            <option value="Low">Low</option>
+                            <option value="Medium">Medium</option>
+                            <option value="High">High</option>
+                        </select>
+              </div>
+
+              <div class="mb-3">
+                <label>Start Date</label>
+                        <input type="date" class="form-control" formControlName="start_date">
+              </div>
+              <div class="mb-3">
+                <label>End Date</label>
+                        <input type="date" class="form-control" formControlName="due_date">
+              </div>
+              <div class="mb-3">
+                <label>Resident Message</label>
+                        <input type="text" class="form-control" placeholder="Task Message"
+                            formControlName="task_message">
+              </div>
+              <div class="MB-3">
+                <label>Personal Description </label>
+                <input type="text" class="form-control" placeholder="Description" formControlName="description">
+            </div>
+            </form> 
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Close
+            </button>
+            <button type="submit" class="btn btn-primary" (click)="saveChanges()">
+              Save changes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+        </div>
+        <div class="tab-pane fade" id="nav-mildstone" role="tabpanel" aria-labelledby="nav-mildstone-tab">
+          <div class="col-lg-12 col-md-12 d-flex  gap-2  mt-2 "
+            style="background-color: #F7F7F7; white-space: wrap ; height: 70px; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px; border-radius: 10px;">
+            <h5 class="fs-4 mt-3 text-center p-2">Resident Visibility Logs</h5> <span><button type="button"
+                routerLink="/Admin/addmildstone" class="btn btn-primary mt-3"><span><i
+                    class="fa-sharp fa-solid fa-plus"></i></span> Add</button></span>
+          </div>
+          <div class="mt-2"
+            style="overflow-x: scroll; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; border-radius: 10px;">
+            <table class="table table-bordered table-hover table-striped ">
+              <thead class="" style="font-size: 13px; text-wrap: nowrap; ">
+                <tr>
+                  <th>Id</th>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody style="text-wrap: nowrap;" class="">
+                <tr *ngFor="let mild of getmildstonedata ;  let i = index">
+                  <td>{{ i+1 }}</td>
+                  <td>{{mild.title}}</td>
+                  <td>{{mild.description}}</td>
+                  <td>{{mild.date_created | date:'dd-MM-yyy' }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="nav-Notes" role="tabpanel" aria-labelledby="nav-Notes-tab">
+          <div class="col-lg-12 col-md-12 d-flex  gap-2  mt-2 "
+            style="background-color: #F7F7F7; white-space: wrap ; height: 70px; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px; border-radius: 10px;">
+            <h5 class="fs-4 mt-3 text-center p-2">Resident Notes</h5> <span><button type="button"
+                routerLink="/Admin/addResidentNote" class="btn btn-primary mt-3"><span><i
+                    class="fa-sharp fa-solid fa-plus"></i></span> Add</button></span>
+          </div>
+          <div class="mt-2"
+            style="overflow-x: scroll; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; border-radius: 10px;">
+            <table class="table table-bordered table-hover table-striped ">
+              <thead class="" style="font-size: 13px; text-wrap: nowrap; ">
+                <tr>
+                  <th>Id</th>
+                  <th>Notes</th>
+                  <th>Name</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody style="text-wrap: nowrap;" class="">
+                <tr *ngFor="let mild of getnotessdata ;  let i = index">
+                  <td>{{ i+1 }}</td>
+                  <td>{{mild.description}}</td>
+                  <td>{{mild.date_created | date:'dd-MM-yyy'}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- Modal -->
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Comments</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <form   [formGroup]="addCommentForm" (ngSubmit)="onSubmitComment()" >
+          <div class="mb-3">
+            <label for="comment" class="form-label">Comment</label>
+            <textarea id="comment" formControlName="comment" class="form-control" placeholder="Add your comment here..." rows="3"></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Add Comment</button>
+          </div>
+        </form>
+
+
+        <ul >
+          <li *ngFor="let comment of taskComments[selectedTask?.id]">
+              <strong>{{ comment.username }}:</strong> {{ comment.comment }}
+              <br>
+              <small class="text-muted">{{ comment.date_created | date:
+                  'short' }}</small>
+          </li>
+      </ul>
+      <ng-template #noComments>
+          <p>No comments yet for this task.</p>
+      </ng-template>
+     
+      </div>
+      <div class="modal-footer">
+      
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Comments</h5>
+        <button type="button" class="btn btn-secondary ms-auto" (click)="toggleMedicineInput()">
+          Add PNR Medicine
+        </button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="addCommentForm" (ngSubmit)="onSubmitComment()">
+          <!-- PNR Medicine Selection Section -->
+          <div *ngIf="showMedicineInput" class="mb-3">
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="">Select PNR Medicine Name</label>
+                <div class="multi-select-dropdown">
+                  <div class="selected-options">
+                    <span *ngFor="let user of selectedUsers" class="selected-item">
+                      {{ user.medicine_name }}
+                      <button type="button" class="unselect-btn" (click)="toggleSelection(user)">
+                        &times;
+                      </button>
+                    </span>
+                  </div>
+                  <div class="dropdown-options">
+                    <label *ngFor="let user of getmedicipnrnrrr" class="dropdown-item">
+                      <input type="checkbox" [checked]="isUserSelected(user)" (change)="toggleSelection(user)" />
+                      {{ user.medicine_name }}
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Comment Field -->
+          <div class="mb-3">
+            <label for="comment" class="form-label">Comment</label>
+            <textarea id="comment" formControlName="comment" class="form-control" placeholder="Add your comment here..."
+              rows="3"></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Add Comment</button>
+          </div>
+        </form>
+
+        <!-- Comment List -->
+        <ul *ngIf="taskComments[selectedTask?.id]?.length; else noComments">
+          <li style="margin: 5x;" *ngFor="let comment of taskComments[selectedTask?.id]">
+            <strong>{{ comment.username }}:</strong> {{ comment.comment }}
+            <br />
+            <small class="text-muted">{{ comment.date_created | date: 'short' : 'UTC'  }}  <span
+              style="background-color: var(--sidebar-color); color: white; border-radius: 5px; padding: 3px;"> <i
+                class="fa-solid fa-pills"></i> {{comment.pnr_medicine_name}}</span> </small>
+          </li>
+        </ul>
+        <ng-template #noComments>
+          <p>No comments yet for this task.</p>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,191 @@
+<div class="modal-dialog modal-lg" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Create New Medical Proffesional</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="cancel()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="loginForm">
+
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="fileInput">Profile</label>
+            <input type="file" id="fileInput" (change)="onSelectFile($event)" accept=".jpeg, .jpg, .png, .pdf, .xlsx"
+              class="form-control" formControlName="profile"
+              [ngClass]="{'is-invalid': loginForm.controls['profile'].errors && ck }">
+            <p class="text-danger" *ngIf="loginForm.controls['profile'].errors && ck"> Enter your profile </p>
+          </div>
+          <div class="form-group col-md-6">
+            <label>First Name</label>
+            <input type="text" class="form-control" placeholder="First Name" formControlName="first_name"
+              [ngClass]="{'is-invalid': loginForm.controls['first_name'].errors && ck }">
+            <p class="text-danger" *ngIf="loginForm.controls['first_name'].errors && ck"> Enter your first name</p>
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <div class="form-group col-md-6">
+            <label>Last Name</label>
+            <input type="text" class="form-control" placeholder="Last Name" formControlName="last_name"
+              [ngClass]="{'is-invalid': loginForm.controls['last_name'].errors && ck }">
+            <p class="text-danger" *ngIf="loginForm.controls['last_name'].errors && ck"> Enter your last name</p>
+          </div>
+          <div class="form-group col-md-6">
+            <label>Type</label>
+            <select formControlName="type" class="form-select">
+              <option value="" selected hidden>Choose Your Type</option>
+              <option value="Physician">Physician</option>
+              <option value="Physician's Assistant">Physician's Assistant</option>
+              <option value="Nurse Practitioner">Nurse Practitioner</option>
+              <option value="Registered Nurse">Registered Nurse</option>
+              <option value="Licensed Vocation Nurse">Licensed Vocation Nurse</option>
+              <option value="Occupation Therapist">Occupation Therapist</option>
+              <option value="Physical Therapist">Physical Therapist</option>
+              <option value="Speech Therapist">Speech Therapist</option>
+              <option value="Respiratory Therapist">Respiratory Therapist</option>
+              <option value="Dentist">Dentist</option>
+              <option value="Optomestrist">Optomestrist</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label>Email</label>
+            <input type="email" class="form-control" formControlName="email" placeholder="Email"
+              [ngClass]="{'is-invalid': loginForm.controls['email'].errors && ck }">
+            <p class="text-danger" *ngIf="loginForm.controls['email'].errors && ck"> Enter your Email</p>
+          </div>
+
+
+          <div class="form-group col-md-6">
+            <label>Password</label>
+            <input type="password" class="form-control" placeholder="Password" formControlName="password"
+              [ngClass]="{'is-invalid': loginForm.controls['password'].errors && ck }">
+            <p class="text-danger" *ngIf="loginForm.controls['password'].errors && ck"> Enter your password</p>
+          </div>
+        </div>
+
+
+
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label>Date of Birth</label>
+            <input type="date" class="form-control" formControlName="date_of_birth"
+              [ngClass]="{'is-invalid': loginForm.controls['date_of_birth'].errors && ck }">
+            <p class="text-danger" *ngIf="loginForm.controls['date_of_birth'].errors && ck"> Enter your date of birth
+            </p>
+          </div>
+          <div class="form-group col-md-6">
+            <label>Date of Joining</label>
+            <input type="date" class="form-control" formControlName="date_of_joining"
+              [ngClass]="{'is-invalid': loginForm.controls['date_of_joining'].errors && ck }">
+            <p class="text-danger" *ngIf="loginForm.controls['date_of_joining'].errors && ck"> Enter your date of
+              joining </p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label>Phone</label>
+            <input type="text" class="form-control" placeholder="Phone" formControlName="phone"
+              [ngClass]="{'is-invalid': loginForm.controls['phone'].errors && ck }">
+            <p class="text-danger" *ngIf="loginForm.controls['phone'].errors && ck">Enter your phone</p>
+          </div>
+
+
+
+          <div class="form-group col-md-6">
+            <label>Designation</label>
+            <input type="text" class="form-control" placeholder="Designation" formControlName="designation"
+              [ngClass]="{'is-invalid': loginForm.controls['designation'].errors && ck }">
+            <p class="text-danger" *ngIf="loginForm.controls['designation'].errors && ck"> Enter your designation </p>
+          </div>
+        </div>
+
+        <div class="row">
+
+          <div class="form-group col-md-6">
+            <label>Gender</label><br>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="gender" id="male" value="male" formControlName="gender"
+                [ngClass]="{'is-invalid': loginForm.controls['gender'].errors && ck }">
+              <label class="form-check-label" for="male">Male</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="gender" id="female" value="female"
+                formControlName="gender" [ngClass]="{'is-invalid': loginForm.controls['gender'].errors && ck }">
+              <label class="form-check-label" for="female">Female</label>
+            </div>
+            <p class="text-danger" *ngIf="loginForm.controls['gender'].errors && ck">Enter your gender</p>
+          </div>
+          <div class="form-group col-md-6 ">
+            <label>Address </label>
+            <input type="text" class="form-control" placeholder="Address" formControlName="address"
+              [ngClass]="{'is-invalid': loginForm.controls['address'].errors && ck }">
+            <p class="text-danger" *ngIf="loginForm.controls['address'].errors && ck"> Enter your address </p>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label>NPI  </label>
+            <input type="text" class="form-control" formControlName="NPI" placeholder="NPI">
+            <small>National Provider Identifier
+            </small>
+
+          </div>
+
+
+          <div class="form-group col-md-6">
+            <label>Speciality</label>
+            <input type="text" class="form-control" placeholder="speciality" formControlName="speciality">
+
+          </div>
+        </div>
+
+
+
+
+        <div class="row">
+          <div class="form-group col-md-6 ">
+            <label>Country </label>
+            <input type="text" class="form-control" placeholder="Country" formControlName="country"
+              [ngClass]="{'is-invalid': loginForm.controls['country'].errors && ck }">
+            <p class="text-danger" *ngIf="loginForm.controls['country'].errors && ck"> Enter your country </p>
+          </div>
+
+          <div class="form-group col-md-6 ">
+            <label>State </label>
+            <input type="text" class="form-control" placeholder="State" formControlName="state"
+              [ngClass]="{'is-invalid': loginForm.controls['state'].errors && ck }">
+            <p class="text-danger" *ngIf="loginForm.controls['state'].errors && ck"> Enter your state </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-6 ">
+            <label>City </label>
+            <input type="text" class="form-control" placeholder="City" formControlName="city"
+              [ngClass]="{'is-invalid': loginForm.controls['city'].errors && ck }">
+            <p class="text-danger" *ngIf="loginForm.controls['city'].errors && ck"> Enter your city </p>
+          </div>
+          <div class="form-group col-md-6 ">
+            <label>Zip code </label>
+            <input type="text" class="form-control" placeholder="Zip code " formControlName="zip_code"
+              [ngClass]="{'is-invalid': loginForm.controls['zip_code'].errors && ck }">
+            <p class="text-danger" *ngIf="loginForm.controls['zip_code'].errors && ck"> Enter your zip code </p>
+          </div>
+        </div>
+        <button type="submit" (click)="addclient()" type="button" class="btn btn-success m-1">Save</button>
+        <button type="submit" class="btn btn-danger" (click)="cancel()" type="button">cancel</button>
+
+      </form>
+    </div>
+  </div>
+</div>

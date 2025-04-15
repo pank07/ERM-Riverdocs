@@ -1,0 +1,116 @@
+
+<div class="col-lg-12 col-md-12 d-flex  gap-2  mt-2 "
+style="background-color: #F7F7F7; white-space: wrap ; height: 70px; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px; border-radius: 10px;">
+<h5 class="fs-4 mt-3 text-center p-2" style="color: #777;">Residents Medes PNR</h5> <span><button type="button"
+    routerLink="/Admin/AddmedicationPrn" class="btn text-white mt-3" style="background-color: #868e92;"><span><i
+        class="fa-sharp fa-solid fa-plus"></i></span> Add</button></span>
+</div>
+
+<div class="mt-2"
+style="overflow-x: scroll; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; border-radius: 10px;">
+<table class="table table-bordered table-hover table-striped ">
+  <thead class="" style="font-size: 13px; text-wrap: nowrap; ">
+    <tr>
+      <th>Id</th>
+      <th>Medicine Name</th>
+      <th>Medicine Restrictions</th>
+      <th>Allergies</th>
+      <th>Precautions</th>
+      <th>MFG Date</th>
+      <th>Expiry Date</th>
+      <th>Quantity</th>
+      <th>Unit</th>
+      <th>Side Effects</th>
+      <th>created Date</th>
+    </tr>
+  </thead>
+  <tbody style="text-wrap: nowrap;" class="">
+    <tr *ngFor="let medes of getmedicinesUser; let i = index;">
+      
+      <td>{{i+1}} <button (click)="pnrmedicinegetById(medes.id)" class="btn-sm btn-addbutton bg-transparent" style="color: var(--sidebar-color);  border-color: var(--sidebar-color);"
+        data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-pen-to-square"></i></button>
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Edit PNR Medicine</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form #userForm="ngForm" (ngSubmit)="editmedicine()">
+                <div class="container mt-2 mb-3">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <label for="medicine_name">medicine_name:</label>
+                      <input type="text" class="form-control" id="medicine_name"
+                        [(ngModel)]="nurseByIdData.medicine_name" name="medicine_name" />
+                    </div>
+                    <div class="col-lg-6">
+                      <label for="allergies">Allergies:</label>
+                      <input type="text" class="form-control" id="allergies" [(ngModel)]="nurseByIdData.allergies"
+                        name="allergies" />
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <label for="mfg_date">MFG Date:</label>
+                      <input type="text" class="form-control" id="mfg_date" [(ngModel)]="nurseByIdData.mfg_date"
+                        name="mfg_date" />
+                    </div>
+                    <div class="col-lg-6">
+                      <label for="expiry_date">expiry_date</label>
+                      <input type="text" class="form-control" id="expiry_date"
+                        [(ngModel)]="nurseByIdData.expiry_date" name="expiry_date" />
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <label for="medicine_restrictions">Medicine Restrictions</label>
+                      <input type="text" class="form-control" id="medicine_restrictions"
+                        [(ngModel)]="nurseByIdData.medicine_restrictions" name="medicine_restrictions" />
+                    </div>
+                    <div class="col-lg-6">
+                      <label for="precautions">Precautions</label>
+                      <input type="text" class="form-control" id="precautions"
+                        [(ngModel)]="nurseByIdData.precautions" name="precautions" />
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <label for="side_effect">Side Effect</label>
+                        <input type="text" class="form-control" id="side_effect"
+                          [(ngModel)]="nurseByIdData.side_effect" name="side_effect" />
+                      </div>
+                      <div class="col-lg-6">
+                        <label for="unit">unit</label>
+                        <input type="text" class="form-control" id="unit" [(ngModel)]="nurseByIdData.unit"
+                          name="unit" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button"   class="btn-close" data-bs-dismiss="modal" aria-label="Close" class="btn btn-secondary">Close</button>
+                  <button type="submit" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div></td>
+
+
+      <td>{{medes.medicine_name}}</td>
+      <td>{{medes.medicine_restrictions}}</td>
+      <td>{{medes.allergies}}</td>
+      <td>{{medes.precautions}}</td>
+      <td>{{medes.mfg_date | date:'dd-MM-yyyy'}}</td>
+      <td>{{medes.expiry_date | date:'dd-MM-yyyy'}}</td>
+      <td>{{medes.quantity}}</td>
+      <td>{{medes.unit}}</td>
+      <th>{{medes.side_effect}}</th>
+      <td>{{medes.created_at | date:'dd-MM-yyyy'}}</td>
+    </tr>
+  </tbody>
+</table>
+</div>

@@ -1,0 +1,163 @@
+<div class="container">
+
+  <div class="row">
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 d-flex justify-content-between ">
+      <h2>Pharmacy </h2>
+      <!-- Add pharmacy modal -->
+      <button type="button" class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <i class="fa-solid fa-plus"></i>
+      </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Add Pharmacy Here</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+
+                <div class="row mt-2">
+
+                  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <label for="pharmacy_name">Pharmacy Name:</label>
+                    <input type="text" class="form-control" id="pharmacy_name" formControlName="pharmacy_name" placeholder="Pharmacy Name" />
+                    <div *ngIf="addForm.get('pharmacy_name')?.invalid && addForm.get('pharmacy_name')?.touched"
+                      style="color: red;">
+                      Pharmacy Name is required.
+                    </div>
+                  </div>
+
+                  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <label for="contact">Contact:</label>
+                    <input type="text" class="form-control" id="contact" formControlName="contact"  placeholder="Contact" />
+                    <div *ngIf="addForm.get('contact')?.invalid && addForm.get('contact')?.touched" style="color: red;">
+                      Contact must be a valid 10-digit number.
+                    </div>
+                  </div>
+
+
+                </div>
+
+                <!-- <div class="row mt-2">
+                
+                
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" class="form-control" id="quantity" formControlName="quantity" />
+                    <div *ngIf="addForm.get('quantity')?.invalid && addForm.get('quantity')?.touched" style="color: red;">
+                        Quantity must be at least 1.
+                    </div>
+                </div>
+                
+                
+            </div> -->
+
+                <div class="row mt-2">
+
+
+                  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" formControlName="email"  placeholder="Email"/>
+                    <div *ngIf="addForm.get('email')?.invalid && addForm.get('email')?.touched" style="color: red;">
+                      Enter a valid email address.
+                    </div>
+                  </div>
+
+
+                </div>
+
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary mt-2" [disabled]="addForm.invalid">Submit</button>
+                </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-4 mb-4" *ngFor="let pharmacy of allData">
+      <div class="card shadow-lg border-light rounded">
+        <div class="card-header text-white d-flex justify-content-between">
+          <p class=" mb-0">{{ pharmacy.pharmacy_name }}</p>
+          <button class="btn btn-secondary btn-sm rounded-4 " (click)="toggleStatus(pharmacy)">
+            {{ pharmacy.status === 1 ? 'Deactivate' : 'Activate' }}
+          </button>
+          <span>
+            <i data-bs-toggle="modal" (click)="byId(pharmacy.id)" data-bs-target="#editModal"
+              class="fa-solid fa-pen-to-square"></i>
+          </span>
+        </div>
+        <div class="card-body">
+          <div class="d-flex flex-column">
+            <p class="card-text">
+              <strong>Contact:</strong> {{ pharmacy.contact }} <br>
+              <strong>Mail:</strong>
+              {{ pharmacy.email || 'Not sent' }} <br>
+              <!-- <strong>Quantity:</strong> {{ pharmacy.quantity }} <br> -->
+            </p>
+            <p class="text-muted">
+              <!-- <small>
+                  <strong>Mail:</strong> 
+                  {{ pharmacy.email || 'Not sent' }} <br>
+                </small> -->
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- Edit modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Pharmacy</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="editForm">
+              <div class="mb-3">
+                <label for="pharmacyName" class="form-label">Pharmacy Name</label>
+                <input type="text" id="pharmacyName" class="form-control" formControlName="pharmacy_name" />
+              </div>
+              <div class="mb-3">
+                <label for="contact" class="form-label">Contact</label>
+                <input type="text" id="contact" class="form-control" formControlName="contact" />
+              </div>
+
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" class="form-control" formControlName="email" />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Close
+            </button>
+            <button type="submit" class="btn btn-primary" (click)="saveChanges()">
+              Save changes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

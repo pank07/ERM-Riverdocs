@@ -1,0 +1,287 @@
+<div class="permissions-page ">
+  <h2>Sidebar Permissions</h2>
+
+  <div class="container">
+    <div class="row justify-content-center mt-4">
+      <div class="col-md-6">
+
+        <div class="card shadow-lg border-light rounded">
+          <div class="card-header text-dark d-flex justify-content-between">
+            <p class="mb-0 bold" style="color: var(--sidebar-color);  border-color: var(--sidebar-color);">Roles</p>
+            <button class="btn-sm btn-addbutton bg-transparent"
+              style="color: var(--sidebar-color);  border-color: var(--sidebar-color);" data-bs-toggle="modal"
+              data-bs-target="#exampleModal">Add</button>
+
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Create Roles</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <form [formGroup]="roles">
+                    <div class="modal-body">
+                      <div class="row">
+                        <div class="form-group col-md-6">
+                          <label for="name">Name</label>
+                          <input type="text" class="form-control" formControlName="name" placeholder="Name" />
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label>Description</label>
+                          <input type="text" class="form-control" formControlName="description"
+                            placeholder="Description" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary" (click)="addroles()">Save changes</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="card-body">
+            <div class="d-flex flex-column">
+              <div class="container">
+                <div class="row" *ngFor="let a of getgroupss">
+                  <div class="col-md-12 mt-3 mb-2">
+                    <div class="card border-0"
+                      style="box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px; border-radius: 20px 20px 20px 20px;">
+                      <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                          <span>{{a.name}}</span><span>
+                            <button class="btn-sm btn-addbutton bg-transparent"
+                              style="color: var(--sidebar-color);  border-color: var(--sidebar-color);"
+                              data-bs-toggle="modal" (click)="getBygroupsss(a.id)" data-bs-target="#exampleModalsetting"><i class="fa-solid fa-gear"></i></button>
+                              <div class="modal fade" id="exampleModalsetting" tabindex="-1"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                  <div class="modal-content" >
+                                    <div class="modal-header">
+                                      <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Roles</h1>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                     
+
+
+
+ <div class="alert alert-danger">
+        <strong>Note:</strong> Admin always have all the permissions. Here you can set permissions for Users and
+        Residents.
+    </div>
+    <div class="permissions-section">
+        <div class="permissions-group w-100"  >
+            <h3>Sidebar Permissions</h3>
+            <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Module/Permissions</th>
+                    <th>User</th>
+                
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let module of userByIdData"> 
+                    <td >{{ module.name }}</td>
+                    <td>
+                      <label class="custom-control overflow-checkbox">
+                        <input (click)="sideMenuById(module.id)"
+                          type="checkbox"
+                          class="overflow-control-input"
+                          [checked]="module.permission == 1 "
+                          (change)="updatePermissions(module, 'permission', $event)"
+                        />
+                        <span class="overflow-control-indicator"></span>
+                      </label>
+                    </td>
+                    
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div> 
+
+
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              
+                              <button (click)="getBygroups(a)" class="btn-sm btn-addbutton bg-transparent"
+                                style="color: var(--sidebar-color);  border-color: var(--sidebar-color);"
+                                data-bs-toggle="modal" data-bs-target="#exampleModaledit"><i
+                                  class="fa-solid fa-pen-to-square"></i></button>
+                              <div class="modal fade" id="exampleModaledit" tabindex="-1"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                  <div class="modal-content" >
+                                    <div class="modal-header">
+                                      <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Roles</h1>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <form [formGroup]="updateForm" (ngSubmit)="editSideunitss()">
+                                        <div class="container mt-2 mb-3">
+                                          <div class="row">
+                                            <div class="col-lg-6">
+                                              <label for="names">Name</label>
+                                              <input type="text" class="form-control"   formControlName="names_role"
+                                                [(ngModel)]="data_name"  />
+                                            </div>
+                                            <div class="col-lg-6">
+                                              <label for="title">Description:</label>
+                                              <input type="text" class="form-control"  formControlName="descriptions_role"
+                                                [(ngModel)]="data_description"  />
+                                            </div>
+                                          </div>
+                                        </div>
+
+
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close" class="btn btn-secondary">Close</button>
+                                          <button type="submit" class="btn btn-primary" data-dismiss="modal">Save
+                                            changes</button>
+                                        </div>
+
+
+                                      </form>
+
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- <nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button"
+        role="tab" aria-controls="nav-home" aria-selected="true">Roles</button>
+      <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button"
+        role="tab" aria-controls="nav-profile" aria-selected="false">Group Permissions</button>
+    </div>
+  </nav>
+  <div class="tab-content " id="nav-tabContent">
+    <div class="tab-pane fade show active " id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+
+      <div class="container">
+        <div class="row justify-content-center mt-4">
+          <div class="col-md-6">
+
+            <div class="card shadow-lg border-light rounded">
+              <div class="card-header text-white d-flex justify-content-between">
+                <p class="mb-0 bold" style="color: var(--sidebar-color);  border-color: var(--sidebar-color);">Roles</p>
+                <button class="btn-sm btn-addbutton bg-transparent"
+                  style="color: var(--sidebar-color);  border-color: var(--sidebar-color);" data-bs-toggle="modal"
+                  data-bs-target="#exampleModal">Add</button>
+
+              </div>
+              <div class="card-body">
+                <div class="d-flex flex-column">
+
+
+
+
+                  <div class="container">
+                    <div class="row" *ngFor="let a of getgroupss">
+                      <div class="col-md-12 mt-3 mb-2">
+                        <div class="card border-0"
+                          style="box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px; border-radius: 20px 20px 20px 20px;">
+                          <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                              <span>{{a.name}}</span><span><button class="btn-sm btn-addbutton bg-transparent"
+                                  style="color: var(--sidebar-color);  border-color: var(--sidebar-color);"
+                                  data-bs-toggle="modal" data-bs-target="#exampleModal"><i
+                                    class="fa-solid fa-pen-to-square"></i></button></span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">...</div>
+
+  </div> -->
+
+
+  <!-- <div class="alert alert-danger">
+        <strong>Note:</strong> Admin always have all the permissions. Here you can set permissions for Users and
+        Residents.
+    </div>
+    <div class="permissions-section">
+        <div class="permissions-group w-100"  >
+            <h3>Sidebar Permissions</h3>
+            <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Module/Permissions</th>
+                    <th>User</th>
+                    <th>Residents</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let module of sideData"> 
+                    <td >{{ module.side_name }}</td>
+                    <td>
+                      <label class="custom-control overflow-checkbox">
+                        <input (click)="sideMenuById(module.id)"
+                          type="checkbox"
+                          class="overflow-control-input"
+                          [checked]="module.is_user === 1"
+                          (change)="updatePermissions(module, 'is_user', $event)"
+                        />
+                        <span class="overflow-control-indicator"></span>
+                      </label>
+                    </td>
+                    <td>
+                      <label class="custom-control overflow-checkbox">
+                        <input (click)="sideMenuById(module.id)"
+                          type="checkbox"
+                          class="overflow-control-input"
+                          [checked]="module.is_client === 1"
+                          (change)="updatePermissions(module, 'is_client', $event)"
+                        />
+                        <span class="overflow-control-indicator"></span>
+                      </label>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div> -->
+</div>

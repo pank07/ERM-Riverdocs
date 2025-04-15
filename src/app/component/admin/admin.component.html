@@ -1,0 +1,367 @@
+<div class="header sticky-top">
+
+
+  <!-- <div class="">
+  <img src="../../../assets/maharaja-removebg-preview.png" class="img-fluid" style="height: 50px;" alt="">
+  <button style="font-family: var(--header-font);color: var(--header-font);" class="btn"  (click)="toggleNav()">
+      <i style="color: #fff;" class="fas fa-bars"></i>
+    </button>
+  </div> -->
+
+
+  <div class="">
+    <img [routerLink]="['/Admin/Home']" routerLinkActive="router-link-active" [src]="selectedLogo"
+      class="img-fluid logo" style="height: 50px;" alt="">
+    <button (click)="toggleNav()" style="font-family: var(--header-font);color: var(--header-font);" class="btn m-1">
+      <i style="color: #fff;" class="fas fa-bars"></i>
+    </button>
+  </div>
+
+
+  <div class="icons d-flex align-items-center">
+    <i class="fas a fa-envelope mx-2"></i>
+    <!-- Notification Bell with Unread Count -->
+    <div class="notification-bell">
+      <i (click)="openModal()" class="fas fa-bell mx-2">
+        <span *ngIf="unreadCount > 0" class="badge bg-danger">{{ unreadCount }}</span>
+      </i>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" tabindex="-1" [ngStyle]="{'display': showModal ? 'block' : 'none'}">
+      <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5">Notifications</h1>
+            <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+          </div>
+          <div class="modal-body">
+            <!-- Notification Cards -->
+            <div class="row">
+              <div *ngFor="let notify of notifys" class="col-12 mb-3">
+                <div class="card notification-card" [ngClass]="{'unread-card': !notify.read}"
+                  (click)="selectNotification(notify)">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ notify.title }}</h5>
+                    <p class="card-text text-muted">{{ notify.message | slice:0:50 }}...</p>
+                    <p class="card-text">
+                      <small class="text-muted">By: {{ notify.username }}</small>
+                    </p>
+                    <small class="text-muted">Date: {{ notify.date | date:'medium' }}</small>
+                    <p>
+                      <small class="text-muted" (click)="closeModal()" [routerLink]="notify.link"> Click For More
+                      </small>
+                    </p>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Selected Notification Details -->
+            <div *ngIf="selectedNotification" class="selected-notification-details mt-4">
+              <h3>{{ selectedNotification.title }}</h3>
+              <p>{{ selectedNotification.message }}</p>
+              <p><strong>By:</strong> {{ selectedNotification.username }}</p>
+              <!-- <p><strong [routerLink]="selectNotification.link" >Click to view</strong></p> -->
+              <small class="text-muted">Date: {{ selectedNotification.date | date:'medium' }}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+<!-- 
+    <div class="notification-bell">
+      <i  class="fas fa-bell mx-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNotification">
+        <span *ngIf="unreadCount > 0" class="badge bg-danger">{{ unreadCount }}</span>
+      </i>
+    </div>
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNotification"
+      aria-labelledby="offcanvasNotificationLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNotificationLabel">Notifications</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+
+      <div class="offcanvas-body">
+        <div class="notification-item">
+          <i class="fas fa-envelope notification-icon"></i>
+          <div class="notification-text">
+            <strong>New Message</strong><br>
+            You have received a message from John.
+          </div>
+        </div>
+
+        <div class="notification-item">
+          <i class="fas fa-tasks notification-icon"></i>
+          <div class="notification-text">
+            <strong>Task Reminder</strong><br>
+            Complete your daily report by 5 PM.
+          </div>
+        </div>
+
+        <div class="notification-item">
+          <i class="fas fa-exclamation-triangle notification-icon"></i>
+          <div class="notification-text">
+            <strong>Warning</strong><br>
+            Your subscription will expire soon. Renew it now.F
+          </div>
+        </div>
+
+        <div class="offcanvas-footer">
+          <button class="btn  archive-button">
+            <i class="fas fa-archive"></i> Archive All
+          </button>
+        </div>
+      </div>
+    </div> -->
+
+
+  
+
+
+
+
+    <div class="dropdown" style="color: var(--header-font-color);">
+      <input type="checkbox" class="dropdown-toggle-checkbox" id="dropdown-toggle" />
+
+      <label style="color: var(--header-font-color);" class="dropdown-toggle" for="dropdown-toggle">Hi  <img src="https://ranipanchore.github.io/assets/wave%20hand.png" class="img-fluid" width="20px" height="20px" alt="Verified User"> ,{{loginname}}
+        <img src="https://kiaan-erp.netlify.app/assets/avter/verified-user.png" alt="Verified User">
+              <!-- <img
+                src="https://cdn-icons-png.flaticon.com/256/149/149071.png"
+                class="img-fluid " style="height: 25px; width: 25px;"
+                alt=""
+              /> -->
+              
+        <!-- <div [ngClass]="{'green-circle': isOnline, 'red-circle': !isOnline}" class="circelssss"></div> -->
+      </label>
+      <div class="dropdown-menu">
+        <!-- <a href="#" class="dropdown-item">
+            <i class="fas fa-user mr-2"></i> Profile
+          </a> -->
+        <div class="dropdown-divider"></div>
+        <a href="#" class="dropdown-item" (click)="logouts()">
+          <i class="fas fa-sign-out-alt mr-2"></i> Logout
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div #mySidebar class=" sidebar" style="padding-bottom: 30px;">
+
+  <!-- <div *ngIf="is_admin()"> -->
+  <div *ngFor="let side of sideData">
+    <div *ngIf="side.permission ==1">
+      <ng-container *ngIf="side.dropdown !== 0; else simpleButton">
+        <button *ngIf="(side.visibility === 1 || side.position === 1 || side.is_admin === 1) && side.is_admin !== 0"
+          class="accordion-button collapsed mt-2 right-side-btn" type="button" data-bs-toggle="collapse"
+          [attr.data-bs-target]="'#flush-collapse-' + side.id" aria-expanded="false"
+          [attr.aria-controls]="'flush-collapse-' + side.id"
+          style="margin-left: 15px; color: var(--sidebar-font-color); width: 90%;">
+          <i class="right-side-icon" [style.color]="side['icon-color']" ngClass="{{side.icon}}"></i>
+          <span class="right-side-data" style="margin-left:24px !important;">
+            {{ side.side_name }}
+          </span>
+
+          <i *ngIf="side.dropdown === 1" class="fas fa-chevron-down" style="margin-left: auto;"></i>
+        </button>
+
+        <div [id]="'flush-collapse-' + side.id" class="accordion-collapse collapse"
+          [attr.aria-labelledby]="'flush-heading-' + side.id" data-bs-parent="#accordionFlushExample">
+          <div class="accordion-body">
+            <ul class="dropulli">
+              <li *ngFor="let submenu of getFilteredSubMenus(side.id)" style="list-style: none;">
+                <a  [routerLink]="['/Admin', submenu.old_name]"
+                  style="color: var(--sidebar-font-color);background-color: var(--sidebar-color);"
+                  class="dropdown-item sidebar-link mb-2" >{{ submenu.name }}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </ng-container>
+
+      <!-- Simple button without dropdown, shown when `dropdown` is 0 -->
+      <ng-template #simpleButton>
+        <button *ngIf="(side.visibility === 1 || side.position === 1 || side.is_admin === 1) && side.is_admin !== 0"
+          class="btn  mt-2 right-side-btn" type="button" [routerLink]="['/Admin', side.side_name_old]"
+          style="margin-left: 14px; color: var(--sidebar-font-color); width: 90%;">
+          <i class="right-side-icon" [style.color]="side['icon-color']" ngClass="{{side.icon}}"></i>
+          <span class="right-side-data" style="margin-left: 14px !important;"
+            [ngClass]="{'sidebar-name': side.side_name.length > 17}">
+            {{ side.side_name }}
+          </span>
+        </button>
+      </ng-template>
+
+    </div>
+  </div>
+  <!-- </div> -->
+
+
+  <!-- <div *ngIf="is_client()">
+    <div *ngFor="let side of sideData">
+      <ng-container *ngIf="side.dropdown !== 0; else simpleButton">
+        <button *ngIf="(side.visibility === 1 || side.position === 1 || side.is_client  === 1) && side.is_client !== 0"
+          class="accordion-button collapsed mt-4 mb-3" type="button" data-bs-toggle="collapse"
+          [attr.data-bs-target]="'#flush-collapse-' + side.id" aria-expanded="false"
+          [attr.aria-controls]="'flush-collapse-' + side.id"
+          style="margin-left: 24px !important;color: var(--sidebar-font-color);">
+
+          <i ngClass="{{side.icon}}"></i>
+          <span style="margin-left:24px !important; text-overflow: ellipsis;">
+            {{ side.side_name }}
+          </span>
+
+          <i *ngIf="side.dropdown === 1" class="fas fa-chevron-down" style="margin-left: auto;"></i>
+        </button>
+
+        <div [id]="'flush-collapse-' + side.id" class="accordion-collapse collapse"
+          [attr.aria-labelledby]="'flush-heading-' + side.id" data-bs-parent="#accordionFlushExample">
+          <div class="accordion-body">
+            <ul class="dropulli">
+              <li *ngFor="let submenu of getFilteredSubMenus(side.id)" style="list-style: none;">
+                <a [routerLink]="['/Admin', submenu.old_name]"
+                  style="color: var(--sidebar-font-color);background-color: var(--sidebar-color);"
+                  class="dropdown-item sidebar-link mb-2">{{ submenu.name }}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </ng-container>
+
+
+      <ng-template #simpleButton>
+        <button *ngIf="(side.visibility === 1 || side.position === 1 || side.is_client === 1) && side.is_client !== 0"
+          class="btn  mt-2" type="button" [routerLink]="['/Admin', side.side_name_old]"
+          style="margin-left: 14px !important;color: var(--sidebar-font-color);">
+          <i ngClass="{{side.icon}}"></i>
+          <span [ngClass]="{'sidebar-name': side.side_name.length > 17}" style="margin-left: 14px !important;">
+            {{ side.side_name }}
+          </span>
+        </button>
+      </ng-template>
+    </div>
+  </div> -->
+
+  <!-- <div *ngIf="is_user()">
+    <div *ngFor="let side of sideData">
+      <ng-container *ngIf="side.dropdown !== 0; else simpleButton">
+        <button *ngIf="(side.visibility === 1 || side.position === 1 || side.is_user === 1) && side.is_user !== 0"
+          class="accordion-button collapsed mt-4 mb-3" type="button" data-bs-toggle="collapse"
+          [attr.data-bs-target]="'#flush-collapse-' + side.id" aria-expanded="false"
+          [attr.aria-controls]="'flush-collapse-' + side.id"
+          style="margin-left: 24px !important;color: var(--sidebar-font-color);">
+
+          <i ngClass="{{side.icon}}"></i>
+          <span style="margin-left:24px !important;">
+            {{ side.side_name }}
+          </span>
+
+          <i *ngIf="side.dropdown === 1" class="fas fa-chevron-down" style="margin-left: auto;"></i>
+        </button>
+
+        <div [id]="'flush-collapse-' + side.id" class="accordion-collapse collapse"
+          [attr.aria-labelledby]="'flush-heading-' + side.id" data-bs-parent="#accordionFlushExample">
+          <div class="accordion-body">
+            <ul class="dropulli">
+              <li *ngFor="let submenu of getFilteredSubMenus(side.id)" style="list-style: none;">
+                <a [routerLink]="['/Admin', submenu.old_name]"
+                  style="color: var(--sidebar-font-color);background-color: var(--sidebar-color);"
+                  class="dropdown-item sidebar-link mb-2">{{ submenu.name }}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </ng-container>
+
+
+      <ng-template #simpleButton>
+        <button *ngIf="(side.visibility === 1 || side.position === 1 || side.is_user === 1) && side.is_user !== 0"
+          class="btn  mt-2" type="button" [routerLink]="['/Admin', side.side_name_old]"
+          style="margin-left: 14px !important;color: var(--sidebar-font-color);">
+          <i ngClass="{{side.icon}}"></i>
+          <span [ngClass]="{'sidebar-name': side.side_name.length > 17}" style="margin-left: 14px !important;">
+            {{ side.side_name }}
+          </span>
+        </button>
+      </ng-template>
+    </div>
+  </div> -->
+
+
+</div>
+
+<div #content class="content" [class.blurred]="showModal">
+
+  
+  <router-outlet></router-outlet>
+ <!-- <div _ngcontent-ng-c1499564997="" class="set_hight">
+    <div class="main_footer">
+        <div class="d-flex align-items-center flex-wrap" style="gap: 4px;">
+            <span>
+                <i class="fas fa-copyright"></i> 2024 KIAAN TECHNOLOGY PVT. LTD
+            </span>
+        </div>
+        <div class="mx-1">
+            <img src="https://kiaan-erp.netlify.app/assets/avter/verified-user.png" alt="Verified User">
+            <span>Admin </span>
+            <span>Login: 12/20/24, 3:08 PM</span>
+        </div>
+        <div class="d-flex align-items-center">
+            <div class="main_div">
+                <a href="#" target="_blank" class="main_div">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" target="_blank" class="main_div">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" target="_blank" class="main_div">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" target="_blank" class="main_div">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+
+</div>  -->
+</div>
+  
+   <div class="set_hight">
+      <div class="main_footer">
+          <div class="d-flex align-items-center flex-wrap" style="gap: 4px;">
+              <span>
+                  <i class="fas fa-copyright"></i> 2024 KIAAN TECHNOLOGY PVT. LTD
+              </span>
+          </div>
+          <div class="mx-1">
+              <img src="https://kiaan-erp.netlify.app/assets/avter/verified-user.png" alt="Verified User">
+              <span>{{loginname}} {{logilastname}} </span>
+              <span>Login: {{currentDateTime | date:'dd-MM-yyy hh:mm a' }}</span> 
+          </div>
+          <div class="d-flex align-items-center">
+              <div class="main_div">
+                  <a href="#" target="_blank" class="main_div">
+                      <i class="fab fa-facebook-f"></i>
+                  </a>
+                  <a href="#" target="_blank" class="main_div">
+                      <i class="fab fa-instagram"></i>
+                  </a>
+                  <a href="#" target="_blank" class="main_div">
+                      <i class="fab fa-twitter"></i>
+                  </a>
+                  <a href="#" target="_blank" class="main_div">
+                      <i class="fab fa-youtube"></i>
+                  </a>
+              </div>
+          </div>
+      </div>
+  </div> 
+  
